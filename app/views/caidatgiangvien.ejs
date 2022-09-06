@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./layout/layout.css.ejs") %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
+
+  </head>
+
+  <body>
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+          <!-- Sidebar - Brand -->
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/giangvien">
+              <div class="sidebar-brand-icon ">
+                  <i class="fas fa-landmark"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3" style="font-size: 13px;">QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP</div>
+          </a>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0">
+
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item active">
+              <a class="nav-link" href="/giangvien">
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <span>Trang chủ</span></a>
+          </li>
+       
+
+          <!-- Divider -->
+          <hr class="sidebar-divider">
+
+          <li class="nav-item">
+            <a class="nav-link" href="/giangvien/timkiemdetai">
+                  <i class="fas fa-fw fa-chart-area"></i>
+                  <span>Tìm kiếm đồ án</span></a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/giangvien/dangkytopic">
+                  <i class="fas fa-fw fa-chart-area"></i>
+                  <span>Đăng ký topic</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/giangvien/dssinhviendangky">
+                  <i class="fab fa-jedi-order"></i>
+                  <span>Duyệt danh sách đăng ký </span>
+              </a>
+              
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/giangvien/svhuongdanh">
+                <i class="far fa-newspaper"></i>
+                  <span>Sinh viên hướng dẫn</span>
+              </a>
+              
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/giangvien/doandahuongdan">
+                <i class="far fa-newspaper"></i>
+                  <span>Quản lý đồ án hướng dẫn</span>
+              </a>
+              
+          </li>
+          <!-- Nav Item - Charts -->
+        
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
+
+       
+
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+          <!-- Main Content -->
+          <div id="content">
+
+              <!-- Topbar -->
+              <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                  <!-- Sidebar Toggle (Topbar) -->
+                  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                      <i class="fa fa-bars"></i>
+                  </button>
+
+                  <!-- Topbar Search -->
+
+                  <!-- Topbar Navbar -->
+                  <ul class="navbar-nav ml-auto">
+
+                      <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                     
+                    
+
+                      <!-- Nav Item - User Information -->
+                      <li class="nav-item dropdown no-arrow">
+                          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=giangvien.tengiangvien %> </span>
+                              <img class="img-profile rounded-circle"
+                                  src="http://localhost:8008/backend/img/undraw_profile.svg">
+                          </a>
+                          <!-- Dropdown - User Information -->
+                          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                              aria-labelledby="userDropdown">
+                              <a class="dropdown-item" href="/giangvien/thongtintaikhoan">
+                                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Thông tin tài khoản
+                              </a>
+                              <a class="dropdown-item" href="/giangvien/caidat">
+                                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Cài đặt
+                              </a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="/" data-toggle="modal" data-target="#logoutModal">
+                                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Đăng xuất
+                              </a>
+                          </div>
+                      </li>
+
+                  </ul>
+
+              </nav>
+              <!-- End of Topbar -->
+
+              <!-- Begin Page Content -->
+              <div class="container-fluid">
+    <h5 class="m-0 font-weight-bold text-primary">Đổi mật khẩu</h5></br></br>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="exampleInputPassword1">Mật khẩu cũ</label>
+              <input
+                type="password"
+                class="form-control"
+                name="passwordOld"
+                id="passwordOld"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="exampleInputPassword1">Mật khẩu mới</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                id="password"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="exampleInputPassword1">Xác nhận mật khẩu</label>
+              <input
+                type="password"
+                class="form-control"
+                name="passwordNew"
+                id="passwordNew"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" id="doimatkhau" class="btn btn-primary" >Đổi mật khẩu</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/giangvien" class="btn btn-primary">Trở lại</a>
+          </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <%-include("./layout/layout.footer.ejs") %>
+    <%-include("./layout/layout.js.ejs") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+
+	<script type="text/javascript">
+		function notify(name) {
+			$.notify(name, "success");
+		}
+	</script>
+    <script>
+      $(document).ready(function () {
+        $("#doimatkhau").click(async function () { var data = await {
+      password: document.getElementById("password").value,
+      passwordOld: document.getElementById("passwordOld").value,
+      passwordNew: document.getElementById("passwordNew").value,
+     
+    };
+    var f = await fetch("http://localhost:8008/giangvien/capnhatmatkhau", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(response => response.json())
+    .then(data => {notify(data.message);setTimeout(() => {
+    location.reload()
+  }, 3000);});
+   });
+        
+    
+});
+    </script>
+  </body>
+</html>

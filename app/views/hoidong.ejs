@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./layout/layout.css.ejs") %>
+</head>
+
+<body>
+
+    <%- include("./layout/layout.header.ejs") %>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="m-0 font-weight-bold text-primary">Quản lý hội đồng</h6>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a style="text-align: right;" class="dropdown-item" href="#" data-toggle="modal"
+                            data-target="#addcate">
+                            <i class="fas fa-plus-square" style='font-size:20px; color: 
+                        #4e73df;'></i> Thêm mới
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID hội đồng</th>
+                                <th>Chủ tịch hội đồng</th>
+                                <th>Số thành viên</th>
+                                <th>Nhận xét</th>
+                                <th>Điểm hội đồng</th>
+                                <th>Tùy chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for (let index=0; index < DS_hoidong.length; index++) {%>
+                                <tr>
+                                    <td>
+                                        <%= DS_hoidong[index].dataValues.IDhoidong %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_hoidong[index].dataValues.chutichhoidong %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_hoidong[index].dataValues.sothanhvien %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_hoidong[index].dataValues.nhanxet %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_hoidong[index].dataValues.diemhoidong %>
+                                    </td>
+                                    <td>
+                                       
+                                           
+                                            <ul style="list-style: none;display: flex;">
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#detailcate<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                                        <i class="fas fa-eye"
+                                                            style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
+                                                    </a>
+                                                </li>
+
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#updatecate<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                                        <i class='fas fa-pencil-ruler'
+                                                            style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
+                                                    </a>
+                                                </li>
+                                                <li> <a 
+                                                        href="./hoidong/xoa_hoidong/<%= DS_hoidong[index].dataValues.IDhoidong %>"
+                                                        onclick=" confirm('Are you sure you want to delete this item?');"><i
+                                                            class="fas fa-trash"
+                                                            style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
+                                                </li>
+                                            </ul>
+                                       
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+        <% for (let index=0; index < DS_hoidong.length; index++) {%>
+            <form action="/quanly/hoidong/sua_hoidong/<%=DS_hoidong[index].dataValues.IDhoidong %>" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <div class="modal fade" id="updatecate<%=DS_hoidong[index].dataValues.IDhoidong %>" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật hội đồng
+                                </h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">ID hội đồng</label>
+                                    <input type="text" class="form-control" name="IDhoidong"
+                                        value="<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Chủ tịch hội đồng</label>
+                                    <input type="text" class="form-control" name="chutichhoidong"
+                                        value="<%=DS_hoidong[index].dataValues.chutichhoidong %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Số thành viên</label>
+                                    <input type="text" class="form-control" name="sothanhvien"
+                                        value="<%=DS_hoidong[index].dataValues.sothanhvien %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Nhận xét</label>
+                                    <input type="text" class="form-control" name="nhanxet"
+                                        value="<%=DS_hoidong[index].dataValues.nhanxet %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Điểm hội đồng</label>
+                                    <input type="text" class="form-control" name="diemhoidong"
+                                        value="<%=DS_hoidong[index].dataValues.diemhoidong %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/quanly/hoidong" class="btn btn-primary">Trở lại</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+             <div class="modal fade" id="detailcate<%=DS_hoidong[index].dataValues.IDhoidong %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết hội đồng</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>ID hội đồng</th>
+                                        <td>
+                                            <%= DS_hoidong[index].dataValues.IDhoidong %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Chủ tịch hội đồng</th>
+                                        <td>
+                                            <%= DS_hoidong[index].dataValues.chutichhoidong %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Số thành viên</th>
+                                        <td>
+
+                                            <%= DS_hoidong[index].dataValues.sothanhvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Nhận xét</th>
+                                        <td>
+
+                                            <%= DS_hoidong[index].dataValues.nhanxet %>
+                                        </td>
+
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Điểm hộ đồng</th>
+                                        <td>
+
+                                            <%= DS_hoidong[index].dataValues.diemhoidong %>
+                                        </td>
+
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <%}%>
+                </div>
+                <form action="/quanly/hoidong/them_hoidong" method="POST" enctype="application/x-www-form-urlencoded">
+
+                    <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới hội đồng</i></h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">ID hội đồng</label>
+                                        <input type="text" class="form-control" name="IDhoidong"
+                                            >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Chủ tịch hội đồng</label>
+                                        <input type="text" class="form-control" name="chutichhoidong"
+                                           >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Số thành viên</label>
+                                        <input type="text" class="form-control" name="sothanhvien"
+                                            >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nhận xét</label>
+                                        <input type="text" class="form-control" name="nhanxet"
+                                            >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Điểm hội đồng</label>
+                                        <input type="text" class="form-control" name="diemhoidong"
+                                           >
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Thêm mới</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/quanly/hoidong" class="btn btn-primary">Trở lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+                <%- include("./layout/layout.footer.ejs") %>
+                    <%- include("./layout/layout.js.ejs") %>
+</body>
+
+
+</html>

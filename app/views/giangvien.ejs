@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./layout/layout.css.ejs") %>
+</head>
+
+<body>
+
+    <%- include("./layout/layout.header.ejs") %>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="m-0 font-weight-bold text-primary">Quản lý giảng viên</h6>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a style="text-align: right;" class="dropdown-item" href="#" data-toggle="modal"
+                            data-target="#addcate">
+                            <i class="fas fa-plus-square" style='font-size:20px; color: 
+                        #4e73df;'></i> Thêm mới
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Ảnh giảng viên</th>
+                                <th>Tên giảng viên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Chuyên ngành</th>
+                                <th>Tùy chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% ds_giangvien.rows.forEach(function(ds_giangvien){ %>
+                                <tr>
+                                    <td>
+                                        <img src="http://localhost:8008/uploads/<%= ds_giangvien.anhgiangvien %>"
+                                        style=" width: 50px;
+                                        height: 50px;
+                                            clip-path: circle(25px at 50% 50%);" />
+                                    </td>
+                                    <td>
+
+                                        <%= ds_giangvien.tengiangvien %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_giangvien.email %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_giangvien.sodienthoai %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_giangvien.tendonvi %>
+                                    </td>
+                                    <td>
+                                       
+                                           
+                                            <ul style="list-style: none;display: flex;">
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#detailcate<%=ds_giangvien.IDgiangvien %>">
+                                                        <i class="fas fa-eye"
+                                                            style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
+                                                    </a>
+                                                </li>
+
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#updatecate<%=ds_giangvien.IDgiangvien %>">
+                                                        <i class='fas fa-pencil-ruler'
+                                                            style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
+                                                    </a>
+                                                </li>
+                                                <li> <a 
+                                                        href="./giangvien/xoa_giangvien/<%= ds_giangvien.IDgiangvien %>"
+                                                        onclick=" confirm('Are you sure you want to delete this item?');"><i
+                                                            class="fas fa-trash"
+                                                            style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
+                                                </li>
+                                            </ul>
+                                       
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+        <% ds_giangvien.rows.forEach(function(ds_giangvien){ %>
+            <form action="/quanly/giangvien/sua_giangvien/<%=ds_giangvien.IDgiangvien %>" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <div class="modal fade" id="updatecate<%=ds_giangvien.IDgiangvien %>" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="width: 800px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật giảng viên
+                                </h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6" >
+                                        <label for="exampleInputPassword1">ID giảng viên</label>
+                                        <input type="text" class="form-control" name="IDgiangvien" value="<%=ds_giangvien.IDgiangvien %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Tên giảng viên</label>
+                                        <input type="text" class="form-control" name="tengiangvien" value="<%=ds_giangvien.tengiangvien %>">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Năm sinh</label>
+                                        <input type="text" class="form-control" name="namsinh" value="<%=ds_giangvien.namsinh %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Giới tính</label>
+                                        <input type="text" class="form-control" name="gioitinh" value="<%=ds_giangvien.gioitinh %>">
+                                    </div>
+                                    </div>
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control" name="email" value="<%=ds_giangvien.email %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Số điện thoại</label>
+                                        <input type="text" class="form-control" name="sodienthoai" value="<%=ds_giangvien.sodienthoai %>">
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Địa chỉ</label>
+                                        <input type="text" class="form-control" name="diachi" value="<%=ds_giangvien.diachi %>">
+                                    </div>
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Học vị</label>
+                                        <input type="text" class="form-control" name="hocvi" value="<%=ds_giangvien.hocvi %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Chức vụ</label>
+                                        <input type="text" class="form-control" name="chucvu" value="<%=ds_giangvien.chucvu %>">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Hướng nghiên cứu</label>
+                                        <textarea  class="form-control" name="huongnghiencuu" rows="4" cols="100"><%=ds_giangvien.huongnghiencuu %></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Khoa</label>
+                                        <input type="text" class="form-control" name="chucvu" value="<%=ds_giangvien.Khoa %>">
+                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label for="exampleInputPassword1">Chọn chuyên ngàng</label>
+                                    <select name="IDdonvi" class="form-control">
+                                        <option value="<%= ds_giangvien.IDdonvi %>">
+                                            <%= ds_giangvien.tendonvi %>
+                                        </option>
+                                        <% chon_donvi.rows.forEach(function(chon_donvi){ %>
+                                            <option value="<%= chon_donvi.IDdonvi %>">
+                                                <%= chon_donvi.tendonvi %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </div></div>
+                               
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/quanly/giangvien" class="btn btn-primary">Trở lại</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+           
+             <div class="modal fade" id="detailcate<%=ds_giangvien.IDgiangvien %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="width: 800px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết giảng viên</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>ID giảng viên</th>
+                                        <td>
+                                            <%= ds_giangvien.IDgiangvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Tên giảng viên</th>
+                                        <td>
+                                            <%= ds_giangvien.tengiangvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Giới tính </th>
+                                        <td>
+                                            <%= ds_giangvien.gioitinh %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Năm sinh </th>
+                                        <td>
+                                            <%= ds_giangvien.namsinh %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>
+                                            <%= ds_giangvien.email %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Số điện thoại </th>
+                                        <td>
+                                            <%= ds_giangvien.sodienthoai %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Địa chỉ </th>
+                                        <td>
+                                            <%= ds_giangvien.diachi %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Ảnh giảng viên </th>
+                                        <td>
+                                            <img src="http://localhost:8008/uploads/<%= ds_giangvien.anhgiangvien %>"
+                                                style="width: 100px;" />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Học vị </th>
+                                        <td>
+                                            <%= ds_giangvien.hocvi %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Chức vụ </th>
+                                        <td>
+                                            <%= ds_giangvien.chucvu %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Hướng nghiên cứu </th>
+                                        <td>
+                                            <%= ds_giangvien.huongnghiencuu %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Khoa </th>
+                                        <td>
+                                            <%= ds_giangvien.Khoa %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Chuyên ngành </th>
+                                        <td>
+                                            <%= ds_giangvien.tendonvi %>
+                                        </td>
+
+                                    </tr>
+
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <% }); %>
+                <form action="/quanly/giangvien/them_giangvien" method="POST" enctype="multipart/form-data">
+
+                    <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width: 800px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới giảng viên</i></h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                   <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Mã giảng viên</label>
+                                        <input type="text" class="form-control" name="IDgiangvien">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Tên giảng viên</label>
+                                        <input type="text" class="form-control" name="tengiangvien">
+                                    </div>
+                                   </div>
+                                   <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Năm sinh</label>
+                                        <input type="date" class="form-control" name="namsinh">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Giới tính</label>
+                                        <input type="text" class="form-control" name="gioitinh">
+                                    </div>
+                                    </div>
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control" name="email">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Số điện thoại</label>
+                                        <input type="text" class="form-control" name="sodienthoai">
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Địa chỉ</label>
+                                        <input type="text" class="form-control" name="diachi">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Ảnh giảng viên</label>
+                                        <input
+                                            class="form-control"
+                                            type="file"
+                                            name="image"
+                                            id="formFileMultiple"
+                                            multiple
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Học vị</label>
+                                        <input type="text" class="form-control" name="hocvi">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Chức vụ</label>
+                                        <input type="text" class="form-control" name="chucvu">
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Hướng nghiên cứu</label>
+                                        <textarea  class="form-control" name="huongnghiencuu" rows="4" cols="100"></textarea>
+                                      </div>
+                                      <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Khoa</label>
+                                        <input type="text" class="form-control" name="Khoa">
+                                    </div>
+                                    <div class="form-group  col-md-6">
+                                        <label for="exampleInputPassword1">Chọn chuyên ngành</label>
+                                        <select name="IDdonvi" class="form-control" >
+                                            <% donvi.rows.forEach(function(donvi){ %>
+                                                <option value="<%= donvi.IDdonvi %>">
+                                                    <%= donvi.tendonvi %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                </div>
+                                    <button type="submit" class="btn btn-primary">Thêm mới
+                                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/quanly/giangvien" class="btn btn-primary">Trở lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <%- include("./layout/layout.footer.ejs") %>
+                    <%- include("./layout/layout.js.ejs") %>
+</body>
+
+
+</html>

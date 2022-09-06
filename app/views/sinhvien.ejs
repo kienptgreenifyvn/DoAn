@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./layout/layout.css.ejs") %>
+</head>
+
+<body>
+
+    <%- include("./layout/layout.header.ejs") %>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="m-0 font-weight-bold text-primary">Quản lý sinh viên</h6>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a style="text-align: right;" class="dropdown-item" href="#" data-toggle="modal"
+                            data-target="#addcate">
+                            <i class="fas fa-plus-square" style='font-size:20px; color: 
+                        #4e73df;'></i> Thêm mới
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Ảnh sinh viên</th>
+                                <th>Mã sinh viên</th>
+                                <th>Tên sinh viên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Tùy chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% ds_sinhvien.rows.forEach(function(ds_sinhvien){ %>
+                                <tr>
+                                    <td>
+                                        <img src="http://localhost:8008/uploads/<%= ds_sinhvien.anhsinhvien %>"
+                                            style=" width: 50px;
+                                            height: 50px;
+                                            clip-path: circle(25px at 50% 50%);" />
+                                    </td>
+                                    <td>
+
+                                        <%= ds_sinhvien.IDsinhvien %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_sinhvien.tensinhvien %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_sinhvien.email %>
+                                    </td>
+                                    <td>
+
+                                        <%= ds_sinhvien.sodienthoai %>
+                                    </td>
+
+                                    <td>
+
+
+                                        <ul style="list-style: none;display: flex;">
+                                            <li> <a href="#" data-toggle="modal"
+                                                    data-target="#detailcate<%=ds_sinhvien.IDsinhvien %>">
+                                                    <i class="fas fa-eye"
+                                                        style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
+                                                </a>
+                                            </li>
+
+                                            <li> <a href="#" data-toggle="modal"
+                                                    data-target="#updatecate<%=ds_sinhvien.IDsinhvien %>">
+                                                    <i class='fas fa-pencil-ruler'
+                                                        style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp;
+                                                </a>
+                                            </li>
+                                            <li> <a href="./sinhvien/xoa_sinhvien/<%= ds_sinhvien.IDsinhvien %>"
+                                                    onclick=" confirm('Are you sure you want to delete this item?');"><i
+                                                        class="fas fa-trash"
+                                                        style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp;
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <% ds_sinhvien.rows.forEach(function(ds_sinhvien){ %>
+            <form action="/quanly/sinhvien/sua_sinhvien/<%=ds_sinhvien.IDsinhvien %>" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <div class="modal fade" id="updatecate<%=ds_sinhvien.IDsinhvien %>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="width: 800px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật sinh viên
+                                </h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row ">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Mã sinh viên</label>
+                                        <input type="text" class="form-control" name="IDsinhvien" value="<%=ds_sinhvien.IDsinhvien %>" readonly>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Tên sinh viên</label>
+                                        <input type="text" class="form-control" name="tensinhvien" value="<%=ds_sinhvien.IDsinhvien %>">
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Năm sinh</label>
+                                        <input type="text" class="form-control" name="namsinh" value="<%=ds_sinhvien.namsinh %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Giới tính</label>
+                                        <select class="custom-select" name="gioitinh">
+                                            <option value="<%=ds_sinhvien.gioitinh %>"><%=ds_sinhvien.gioitinh %></option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Số điện thoại</label>
+                                        <input type="tel" class="form-control" name="sodienthoai" value="<%=ds_sinhvien.sodienthoai %>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Điểm tích lũy</label>
+                                        <input type="text" class="form-control" name="diemtichluy" value="<%=ds_sinhvien.diemtichluy %>">
+                                    </div>
+                                </div>
+                               
+                                    <div class="form-group ">
+                                        <label for="exampleInputPassword1">Quê quán</label>
+                                        <input type="text" class="form-control" name="quequan" value="<%=ds_sinhvien.quequan %>">
+                                    </div>
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Kỹ năng</label>
+                                    <textarea  class="form-control" name="kynang" rows="4" cols="100"><%=ds_sinhvien.kynang %></textarea>
+                                  </div>
+            
+                                <div class="form-row" style="padding-top: 20px;">
+                                    <div class="form-group col-md-4">
+                                        <label for="exampleInputPassword1">Bậc đào tạo</label>
+                                        <select class="custom-select" name="bacdaotao">
+                                            <option value="<%=ds_sinhvien.bacdaotao %>"><%=ds_sinhvien.bacdaotao %></option>
+                                            <option value="Chính quy">Chính Quy</option>
+                                            <option value="Tại chức">Tại chức</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="exampleInputPassword1">Hệ Đào tạo</label>
+                                        <select class="custom-select" name="hedaotao">
+                                            <option value="<%=ds_sinhvien.hedaotao %>"><%=ds_sinhvien.hedaotao %></option>
+                                            <option value="Đại Học">Đại học</option>
+                                            <option value="Cao đẳng">Cao đẳng</option>
+                                            <option value="Trung cấp">Trung cấp</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="exampleInputPassword1">Khóa đào tạo</label>
+                                        <input type="text" class="form-control" name="khoadaotao" value="<%=ds_sinhvien.khoadaotao %>">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Chọn lớp</label>
+                                        <select name="IDlop" class="form-control">
+                                            <option value="<%= ds_sinhvien.IDlop %>">
+                                                <%= ds_sinhvien.tenlop %>
+                                            </option>
+                                            <% chon_lop.rows.forEach(function(chon_lop){ %>
+                                                <option value="<%= chon_lop.IDlop %>">
+                                                    <%= chon_lop.tenlop %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputPassword1">Chọn chuyên ngành</label>
+                                        <select name="IDdonvi" class="form-control">
+                                            <option value="<%= ds_sinhvien.IDdonvi %>">
+                                                <%= ds_sinhvien.tendonvi %>
+                                            </option>
+                                            <% chon_donvi.rows.forEach(function(chon_donvi){ %>
+                                                <option value="<%= chon_donvi.IDdonvi %>">
+                                                    <%= chon_donvi.tendonvi %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                </div>
+                              
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <button type="submit" class="btn btn-primary">Thêm
+                                            mới</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="/quanly/sinhvien" class="btn btn-primary">Trở lại</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal fade" id="detailcate<%=ds_sinhvien.IDsinhvien %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="width: 800px">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết sinh viên</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered" >
+                                <tbody>
+                                    <tr>
+                                        <th>ID sinh viên</th>
+                                        <td>
+                                            <%= ds_sinhvien.IDsinhvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Tên sinh viên</th>
+                                        <td>
+                                            <%= ds_sinhvien.tensinhvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Giới tính </th>
+                                        <td>
+                                            <%= ds_sinhvien.gioitinh %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Năm sinh </th>
+                                        <td>
+                                            <%= ds_sinhvien.namsinh %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>
+                                            <%= ds_sinhvien.email %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Số điện thoại </th>
+                                        <td>
+                                            <%= ds_sinhvien.sodienthoai %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Quê quán </th>
+                                        <td>
+                                            <%= ds_sinhvien.quequan %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Source code </th>
+                                        <td>
+                                           <%= ds_sinhvien.sourcecode %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Điểm tích lũy</th>
+                                        <td>
+                                            <%= ds_sinhvien.diemtichluy %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kỹ năng</th>
+                                        <td>
+                                            <%= ds_sinhvien.kynang %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bậc đào tạo </th>
+                                        <td>
+                                            <%= ds_sinhvien.bacdaotao %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hệ đào tạo</th>
+                                        <td>
+                                            <%= ds_sinhvien.hedaotao%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Khóa đào tạo</th>
+                                        <td>
+                                            <%= ds_sinhvien.khoadaotao %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lớp</th>
+                                        <td>
+                                            <%= ds_sinhvien.tenlop %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chuyên ngành</th>
+                                        <td>
+                                            <%= ds_sinhvien.tendonvi %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% }); %>
+                <form action="/quanly/sinhvien/them_sinhvien" method="POST" enctype="multipart/form-data">
+                    <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:800px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới sinh viên</i></h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-row ">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Mã sinh viên</label>
+                                            <input type="text" class="form-control" name="IDsinhvien">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Tên sinh viên</label>
+                                            <input type="text" class="form-control" name="tensinhvien">
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Năm sinh</label>
+                                            <input type="date" class="form-control" name="namsinh">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Giới tính</label>
+                                            <select class="custom-select" name="gioitinh">
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Email</label>
+                                            <input type="email" class="form-control" name="email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Số điện thoại</label>
+                                            <input type="tel" class="form-control" name="sodienthoai">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Điểm tích lũy</label>
+                                            <input type="text" class="form-control" name="diemtichluy">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Quê quán</label>
+                                            <input type="text" class="form-control" name="quequan">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Kỹ năng</label>
+                                        <textarea  class="form-control" name="kynang" rows="4" cols="100"></textarea>
+                                      </div>
+                                    <div class="form-group">
+                                        <label for="formFileMultiple" class="form-label">Ảnh sinh viên</label>
+                                        <input class="form-control" type="file" name="file" id="formFileMultiple" multiple />
+                                    </div>
+                                    <div class="form-row" style="padding-top: 20px;">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPassword1">Bậc đào tạo</label>
+                                            <select class="custom-select" name="bacdaotao">
+                                                <option value="Chính quy">Chính Quy</option>
+                                                <option value="Tại chức">Tại chức</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPassword1">Hệ Đào tạo</label>
+                                            <select class="custom-select" name="hedaotao">
+                                                <option value="Đại Học">Đại học</option>
+                                                <option value="Cao đẳng">Cao đẳng</option>
+                                                <option value="Trung cấp">Trung cấp</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPassword1">Khóa đào tạo</label>
+                                            <input type="text" class="form-control" name="khoadaotao">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Chọn lớp</label>
+                                            <select name="IDlop" class="form-control">
+                                                <% lop.rows.forEach(function(lop){ %>
+                                                    <option value="<%= lop.IDlop %>">
+                                                        <%= lop.tenlop %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputPassword1">Chọn đơn vị</label>
+                                            <select name="IDdonvi" class="form-control">
+                                                <% donvi.rows.forEach(function(donvi){ %>
+                                                    <option value="<%= donvi.IDdonvi %>">
+                                                        <%= donvi.tendonvi %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <button type="submit" class="btn btn-primary">Thêm
+                                                mới</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="/quanly/sinhvien" class="btn btn-primary">Trở lại</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <%- include("./layout/layout.footer.ejs") %>
+                    <%- include("./layout/layout.js.ejs") %>
+</body>
+
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./layout/layout.css.ejs") %>
+</head>
+
+<body>
+
+    <%- include("./layout/layout.header.ejs") %>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="m-0 font-weight-bold text-primary">Quản lý chủ đề</h6>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a style="text-align: right;" class="dropdown-item" href="#" data-toggle="modal"
+                            data-target="#addcate">
+                            <i class="fas fa-plus-square" style='font-size:20px; color: 
+                        #4e73df;'></i> Thêm mới
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID chủ để</th>
+                                <th>Tên chủ đề</th>
+                                <th>Ghi chú</th>
+                                <th>Tùy chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for (let index=0; index < DS_chude.length; index++) {%>
+                                <tr>
+                                    <td>
+                                        <%= DS_chude[index].dataValues.IDchude %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_chude[index].dataValues.tenchude %>
+                                    </td>
+                                    <td>
+
+                                        <%= DS_chude[index].dataValues.ghichu %>
+                                    </td>
+                                    <td>
+                                       
+                                           
+                                            <ul style="list-style: none;display: flex;">
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#detailcate<%=DS_chude[index].dataValues.IDchude %>">
+                                                        <i class="fas fa-eye"
+                                                            style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
+                                                    </a>
+                                                </li>
+
+                                                <li> <a  href="#" data-toggle="modal"
+                                                        data-target="#updatecate<%=DS_chude[index].dataValues.IDchude %>">
+                                                        <i class='fas fa-pencil-ruler'
+                                                            style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
+                                                    </a>
+                                                </li>
+                                                <li> <a 
+                                                        href="./chude/xoa_chude/<%= DS_chude[index].dataValues.IDchude %>"
+                                                        onclick=" confirm('Are you sure you want to delete this item?');"><i
+                                                            class="fas fa-trash"
+                                                            style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
+                                                </li>
+                                            </ul>
+                                       
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+        <% for (let index=0; index < DS_chude.length; index++) {%>
+            <form action="/quanly/chude/sua_chude/<%=DS_chude[index].dataValues.IDchude %>" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <div class="modal fade" id="updatecate<%=DS_chude[index].dataValues.IDchude %>" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật chủ đề
+                                </h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">ID chủ đề</label>
+                                    <input type="text" class="form-control" name="IDchude"
+                                        value="<%=DS_chude[index].dataValues.IDchude %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Tên chủ đề</label>
+                                    <input type="text" class="form-control" name="tenchude"
+                                        value="<%=DS_chude[index].dataValues.tenchude %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ghi chú</label>
+                                    <input type="text" class="form-control" name="ghichu"
+                                        value="<%=DS_chude[index].dataValues.ghichu %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/quanly/chude" class="btn btn-primary">Trở lại</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+             <div class="modal fade" id="detailcate<%=DS_chude[index].dataValues.IDchude %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết khoa</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>ID chủ đề</th>
+                                        <td>
+                                            <%= DS_chude[index].dataValues.IDchude %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Tên chủ đề</th>
+                                        <td>
+                                            <%= DS_chude[index].dataValues.tenchude %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Ghi chú</th>
+                                        <td>
+
+                                            <%= DS_chude[index].dataValues.ghichu %>
+                                        </td>
+
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <%}%>
+                </div>
+                <form action="/quanly/chude/them_chude" method="POST" enctype="application/x-www-form-urlencoded">
+
+                    <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới chủ đề</i></h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">ID chủ đề</label>
+                                        <input type="text" class="form-control" name="IDchude">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Tên chủ đề</label>
+                                        <input type="text" class="form-control" name="tenchude">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Ghi chú</label>
+                                        <input type="text" class="form-control" name="ghichu">
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">Thêm mới
+                                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/quanly/chude" class="btn btn-primary">Trở lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+                <%- include("./layout/layout.footer.ejs") %>
+                    <%- include("./layout/layout.js.ejs") %>
+</body>
+
+
+</html>
