@@ -33,6 +33,7 @@ exports.upload = async (req, res) => {
             namsinh: row[4],
             sodienthoai: row[5],
             quequan: row[6],
+            anhsinhvien: "icon_user.png",
             bacdaotao: row[7],
             hedaotao: row[8],
             khoadaotao: row[9],

@@ -6,6 +6,7 @@ const Detai = db.detai;
 const Sinhvien = db.sinhvien;
 const Thongbao = db.thongbao;
 const Op = db.Sequelize.Op;
+const nodemailer = require("nodemailer");
 
 exports.danhsachsinhviendangky = (req, res) => {
   const giangvien = req.session.giangvien;
@@ -414,6 +415,53 @@ exports.quanlydoanhuongdan = (req, res) => {
             );
           });
         }
+      }
+    );
+  });
+};
+
+exports.sendMail = (req, res) => {
+  const giangvien = req.session.giangvien;
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(
+      `SELECT * FROM giangviens inner join users on users."id" = giangviens."id" where giangviens."IDgiangvien" = ${giangvien.IDgiangvien}  `,
+      function (err, result) {
+        done();
+
+        if (err) {
+          res.end();
+          return console.error("error running query", err);
+        } else {
+          var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "phamtrungkienk28cc@gmail.com",
+              pass: "gerrqhrriktwueqw",
+            },
+          });
+
+          var mailOptions = {
+            from: `phamtrungkienk28cc@gmail.com`,
+            to: `${req.body.emailsinhvien}`,
+            subject: `${req.body.tieude}`,
+            text: ``,
+            html: `<b>Nội dung :</b>   <br>${req.body.noidung}`,
+          };
+
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("Email sent: " + info.response);
+            }
+          });
+        }
+        return res.json({
+          message: "Gửi thông báo cho sinh viên thành công !",
+        });
       }
     );
   });

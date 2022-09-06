@@ -87,6 +87,92 @@ exports.danhsach_giangvien = (req, res) => {
   });
 };
 
+exports.loc_danhsach_giangvien = (req, res) => {
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(
+      `SELECT * FROM giangviens  inner join donvis on giangviens."IDdonvi" = donvis."IDdonvi" inner join users on giangviens."id" = users."id" where 1 = 1 ${
+        req.body.IDdonvi != ""
+          ? ` and giangviens."IDdonvi" = ${req.body.IDdonvi}`
+          : ""
+      }`,
+      function (err, result) {
+        done();
+
+        if (err) {
+          res.end();
+          return console.error("error running query", err);
+        } else {
+          var ds_giangvien = result;
+          pool_db.connect(function (err, client, done) {
+            if (err) {
+              return console.error("error", err);
+            }
+            client.query(`SELECT * FROM donvis`, function (err, result) {
+              done();
+
+              if (err) {
+                res.end();
+                return console.error("error running query", err);
+              } else {
+                var donvi = result;
+
+                pool_db.connect(function (err, client, done) {
+                  if (err) {
+                    return console.error("error", err);
+                  }
+                  client.query(
+                    `SELECT * FROM giangviens inner join donvis on giangviens."IDdonvi" = donvis."IDdonvi"  `,
+                    function (err, result) {
+                      done();
+
+                      if (err) {
+                        res.end();
+                        return console.error("error running query", err);
+                      } else {
+                        var chon_giangvien = result;
+                        pool_db.connect(function (err, client, done) {
+                          if (err) {
+                            return console.error("error", err);
+                          }
+                          client.query(
+                            `SELECT * FROM donvis where "IDdonvi" != ${chon_giangvien.rows[0].IDdonvi} `,
+                            function (err, result) {
+                              done();
+
+                              if (err) {
+                                res.end();
+                                return console.error(
+                                  "error running query",
+                                  err
+                                );
+                              } else {
+                                var chon_donvi = result;
+                                res.render("./giangvien.ejs", {
+                                  chon_giangvien: chon_giangvien.rows[0],
+                                  chon_donvi: chon_donvi,
+                                  donvi: donvi,
+                                  ds_giangvien: ds_giangvien,
+                                });
+                              }
+                            }
+                          );
+                        });
+                      }
+                    }
+                  );
+                });
+              }
+            });
+          });
+        }
+      }
+    );
+  });
+};
+
 exports.them_giangvien = async (req, res) => {
   try {
     const newUser = {

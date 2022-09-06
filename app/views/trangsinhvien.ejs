@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include("./layout/layout.css.ejs") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
   </head>
 
   <body>
@@ -50,7 +51,7 @@
                 <span>Đăng ký đề tài</span></a>
         </li> 
 		     <li class="nav-item">
-            <a class="nav-link" href="/sinhvien/nopdoan">
+            <a class="nav-link dangky" href="/sinhvien/nopdoan">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Nộp đồ án</span></a>
         </li>
@@ -332,5 +333,39 @@
 
     <%-include("./layout/layout.footer.ejs") %>
     <%-include("./layout/layout.js.ejs") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+
+	<script type="text/javascript">
+		function notify(name) {
+			$.notify(name, "success");
+		}
+	</script>
+    <script>
+      $(document).ready(function () {
+        $(".dangky").click(async function () { var data = await {
+    };
+    var f = await fetch("http://localhost:8008/sinhvien/nopdoan", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }) .then((response) => response.json())
+            .then((data) => {
+              if (data.uri) {
+                window.location = data.uri;
+              } else {
+                notify(data.message);
+                // setTimeout(() => {
+                //   location.reload();
+                // }, 3000);
+              }
+            });
+   });
+        
+    
+});
+    </script>
   </body>
 </html>

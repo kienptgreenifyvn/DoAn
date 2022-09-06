@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <%- include("./layout/layout.css.ejs") %>
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
   </head>
 
   <body>
@@ -221,5 +223,37 @@
     </div>
     <%-include("./layout/layout.footer.ejs") %>
     <%-include("./layout/layout.js.ejs") %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+
+    <script type="text/javascript">
+      function notify(name) {
+        $.notify(name, "success");
+      }
+    </script>
+      <script>
+        $(document).ready(function () {
+          $("#doimatkhau").click(async function () { var data = await {
+        password: document.getElementById("password").value,
+        passwordOld: document.getElementById("passwordOld").value,
+        passwordNew: document.getElementById("passwordNew").value,
+       
+      };
+      var f = await fetch("http://localhost:8008/sinhvien/capnhatmatkhau", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(response => response.json())
+      .then(data => {notify(data.message);setTimeout(() => {
+      location.reload()
+    }, 3000);});
+     });
+          
+      
+  });
+  </script>
   </body>
 </html>

@@ -33,4 +33,5 @@ module.exports = function (app) {
     requireLogin,
     controller.quanlydoanhuongdan
   );
+  app.post("/giangvien/sendMail", requireLogin, controller.sendMail);
 };
