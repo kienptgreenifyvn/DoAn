@@ -53,7 +53,7 @@ exports.capnhatthongtin_sv = async (req, res) => {
         sodienthoai: sodienthoai,
         kynang: kynang,
         diemtichluy: diemtichluy,
-        anhsinhvien: req.file.originalname,
+        //anhsinhvien: req.file.originalname,
       },
       {
         where: {
@@ -123,7 +123,7 @@ exports.capnhatthongtin_gv = async (req, res) => {
         IDgiangvien: IDgiangvien,
         tengiangvien: tengiangvien,
         sodienthoai: sodienthoai,
-        anhgiangvien: req.file.originalname,
+        // anhgiangvien: req.file.originalname,
         huongnghiencuu: huongnghiencuu,
         diachi: diachi,
       },

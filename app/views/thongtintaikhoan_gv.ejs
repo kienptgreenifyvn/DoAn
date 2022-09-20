@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include("./layout/layout.css.ejs") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
   </head>
 
   <body>
@@ -142,18 +143,18 @@
         <div><img src="http://localhost:8008/uploads/<%=thongtin.anhgiangvien %>" alt="" style="width:250px; margin-left: 30px;margin-top: 50px;"></div>
       </div>
       <div class="col-8">
-        <form
+          <!-- <form
           action="/giangvien/capnhatthongtin"
           method="POST"
          enctype="multipart/form-data"
-        >
+        > -->
         <div class="form-group col-md-6">
           <input
             type="hidden"
             class="form-control"
             name="IDgiangvien"
             value="<%=thongtin.IDgiangvien %>"
-            
+            id="IDgiangvien"
           />
         </div>
           <div class="form-row">
@@ -164,7 +165,7 @@
                 class="form-control"
                 name="tengiangvien"
                 value="<%=thongtin.tengiangvien %>"
-                
+                id="tengiangvien"
               />
               
             </div>
@@ -175,7 +176,7 @@
                 class="form-control"
                 name="email"
                 value="<%=thongtin.email %>"
-                
+                id="email"
               />
             </div>
         </div>
@@ -187,7 +188,7 @@
                 class="form-control"
                 name="diachi"
                 value="<%=thongtin.diachi %>"
-                
+                id="diachi"
               />
             </div>
             <div class="form-group col-md-6">
@@ -197,37 +198,72 @@
                 class="form-control"
                 name="sodienthoai"
                 value="<%=thongtin.sodienthoai %>"
-                
+                id="sodienthoai"
               />
             </div>
           </div>
           <div class="form-group">
-            <label for="formFileMultiple" class="form-label"
+            <!-- <label for="formFileMultiple" class="form-label"
               >Ảnh sinh viên</label
             >
             <input
               class="form-control"
               type="file"
               name="anh"
-              id="formFileMultiple"
+              id="anh"
               multiple
-              required
+              
               
             />
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Hướng nghiên cứu</b></label>
-            <textarea  class="form-control" name="huongnghiencuu" rows="4" cols="50"><%=thongtin.huongnghiencuu %></textarea>
+            <textarea  class="form-control" name="huongnghiencuu" id="huongnghiencuu" rows="4" cols="50"><%=thongtin.huongnghiencuu %></textarea>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary chinhsua">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/giangvien" class="btn btn-primary">Trở lại</a>
           </div>
-        </form>
+      
       </div>
       <div class="col-1"></div>
     </div>
     <%-include("./layout/layout.footer.ejs") %>
     <%-include("./layout/layout.js.ejs") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+
+    <script type="text/javascript">
+      function notify(name) {
+        $.notify(name, "success");
+      }
+    </script>
+      <script>
+        $(document).ready(function () {
+          $(".chinhsua").click(async function () { var data = await {
+        IDgiangvien: document.getElementById("IDgiangvien").value,
+        tengiangvien: document.getElementById("tengiangvien").value,
+        email: document.getElementById("email").value,
+        diachi: document.getElementById("diachi").value,
+       // anh: document.getElementById("anh").value,
+        huongnghiencuu: document.getElementById("huongnghiencuu").value,
+
+       
+      };
+      var f = await fetch("http://localhost:8008/giangvien/capnhatthongtin", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(response => response.json())
+      .then(data => {notify(data.message);setTimeout(() => {
+      location.reload()
+    }, 3000);});
+     });
+          
+      
+  });
+  </script>
   </body>
 </html>

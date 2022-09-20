@@ -33,5 +33,10 @@ module.exports = function (app) {
     requireLogin,
     controller.quanlydoanhuongdan
   );
+  app.get(
+    "/giangvien/xoa_doandahuongdan/:IDdetai",
+    requireLogin,
+    controller.xoa_quanlydoanhuongdan
+  );
   app.post("/giangvien/sendMail", requireLogin, controller.sendMail);
 };

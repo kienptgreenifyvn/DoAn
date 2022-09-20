@@ -27,4 +27,14 @@ module.exports = function (app) {
     permission.requireLogin,
     controller.them_dangkytopic
   );
+  app.post(
+    "/giangvien/sua_dangkytopic",
+    permission.requireLogin,
+    controller.capnhat_detai
+  );
+  app.get(
+    "/giangvien/xoa_dangkytopic/:IDdetai",
+    permission.requireLogin,
+    controller.xoa_detai
+  );
 };

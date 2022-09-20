@@ -185,6 +185,8 @@
               <tr>
                 <th>Chủ đề</th>
                 <th>Đề tài</th>
+                <th>Tùy chọn</th>
+                
               </tr>
             </thead>
 
@@ -193,6 +195,22 @@
               <tr>
                 <td><%= ds_gv.tenchude %></td>
                 <td><%= ds_gv.tendetai %></td>
+                <td>
+                  <ul style="list-style: none;display: flex;">
+                    <li> <a  href="#" data-toggle="modal"
+                            data-target="#updatecate<%=ds_gv.IDdetai %>">
+                            <i class='fas fa-pencil-ruler'
+                                style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
+                        </a>
+                    </li>
+                    <li> <a 
+                            href="./xoa_dangkytopic/<%= ds_gv.IDdetai %>"
+                            onclick=" confirm('Are you sure you want to delete this item?');"><i
+                                class="fas fa-trash"
+                                style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
+                    </li>
+                </ul>
+                </td>
               </tr>
               <% }); %>
             </tbody>
@@ -200,14 +218,51 @@
         </div>
       </div>
     </div>
-   
-
+    <% ds_gv.rows.forEach(function(ds_gv){ %>
+    <div class="modal fade" id="updatecate<%=ds_gv.IDdetai %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 700px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa đề tài giảng viên</i></h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Tên Đề tài</label>
+                    <input type="text" class="form-control" name="tendetai" value="<%= ds_gv.tendetai %>" >
+                </div>
+            
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Chọn chủ đề</label>
+                  <select name="IDchude" class="form-control">
+                    <option value="<%= ds_gv.IDchude %>">
+                      <%= ds_gv.tenchude %>
+                  </option>
+                      <% chude.rows.forEach(function(chude){ %>
+                          <option value="<%= chude.IDchude %>">
+                              <%= chude.tenchude %>
+                          </option>
+                          <% }); %>
+                  </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 120px;" data-dismiss="modal">Thêm đề tài</button>
+            </div>
+          
+           
+            
+        </div>
+    </div>
+</div>
+<% }); %>
       <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
               <div class="modal-content" style="width: 700px;">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Thêm mới Đề tài</i></h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Thêm mới đề tài giảng viên</i></h5>
                       <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">×</span>
                       </button>

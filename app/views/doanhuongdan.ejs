@@ -198,8 +198,9 @@
           >
             <thead>
               <tr>
-                <th>Sinh viên đã hướng dẫn</th>
                 <th>Đề tài đã hướng dẫn</th>
+                <th>Sinh viên đã hướng dẫn</th>
+                <th>Số sinh viên thực hiện</th>
                 <th>Tùy chọn</th>
               </tr>
             </thead>
@@ -207,24 +208,29 @@
             <tbody>
               <% huongdan.rows.forEach(function(huongdan){ %>
               <tr>
-                <td><%= huongdan.tensinhvien %></td>
                 <td><%= huongdan.tendetai %></td>
+                <td><%= huongdan.tensinhvien %></td>
+                <td>1</td>
                 <td>
                   <!-- Example single danger button -->
                   <div class="btn-group">
                     <a
-                      class="dropdown-item btn btn-primary"
+                     
                       href="<%=huongdan.IDgiangvien %>"
                       data-toggle="modal"
                       data-target="#detailcate<%=huongdan.IDgiangvien %>"
-                      style="
-                        background-color: #4e73df;
-                        color: white;
-                        font-size: 16px;
-                      "
+                      
                     >
-                      Chi tiết
+                    <i class="fas fa-eye"
+                    style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
+                  </div>
+                  <div class="btn-group">
+                    <a 
+                    href="./xoa_doandahuongdan/<%= huongdan.IDdetai%>"
+                    onclick=" confirm('Bạn có chắc muốn xóa đồ án này không?');"><i
+                        class="fas fa-trash"
+                        style='font-size:18px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
                   </div>
                 </td>
               </tr>

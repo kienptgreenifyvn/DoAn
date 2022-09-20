@@ -137,18 +137,18 @@
         <div><img src="http://localhost:8008/uploads/<%=thongtin.anhsinhvien %>" alt="" style="width:250px; margin-left: 30px;margin-top: 50px;"></div>
       </div>
       <div class="col-8">
-        <form
+        <!-- <form
           action="/sinhvien/capnhatthongtin"
           method="POST"
          enctype="multipart/form-data"
-        >
+        > -->
         <div class="form-group col-md-6">
           <input
             type="hidden"
             class="form-control"
             name="IDsinhvien"
             value="<%=thongtin.IDsinhvien %>"
-            
+            id="IDsinhvien"
           />
         </div>
           <div class="form-row">
@@ -159,7 +159,7 @@
                 class="form-control"
                 name="tensinhvien"
                 value="<%=thongtin.tensinhvien %>"
-                
+                id="tensinhvien"
               />
               
             </div>
@@ -170,7 +170,7 @@
                 class="form-control"
                 name="diemtichluy"
                 value="<%=thongtin.diemtichluy %>"
-                
+                id="diemtichluy"
               />
             </div>
         </div>
@@ -182,7 +182,7 @@
                 class="form-control"
                 name="email"
                 value="<%=thongtin.email %>"
-                
+                id="email"
               />
             </div>
             <div class="form-group col-md-6">
@@ -192,11 +192,11 @@
                 class="form-control"
                 name="sodienthoai"
                 value="<%=thongtin.sodienthoai %>"
-                
+                id="sodienthoai"
               />
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="formFileMultiple" class="form-label"
               >Ảnh sinh viên</label
             >
@@ -208,16 +208,16 @@
               multiple
               required
             />
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Các kiến thức và kỹ năng</b></label>
-            <textarea  class="form-control" name="kynang" rows="4" cols="50"><%=thongtin.kynang %></textarea>
+            <textarea  class="form-control" name="kynang" id="kynang" rows="4" cols="50"><%=thongtin.kynang %></textarea>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary chinhsua">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/sinhvien" class="btn btn-primary">Trở lại</a>
           </div>
-        </form>
+  
       </div>
       <div class="col-1"></div>
     </div>
@@ -234,13 +234,19 @@
     </script>
       <script>
         $(document).ready(function () {
-          $("#doimatkhau").click(async function () { var data = await {
-        password: document.getElementById("password").value,
-        passwordOld: document.getElementById("passwordOld").value,
-        passwordNew: document.getElementById("passwordNew").value,
+          $(".chinhsua").click(async function () { var data = await {
+            IDsinhvien: document.getElementById("IDsinhvien").value,
+        tensinhvien: document.getElementById("tensinhvien").value,
+        email: document.getElementById("email").value,
+        sodienthoai: document.getElementById("sodienthoai").value,
+        diemtichluy: document.getElementById("diemtichluy").value,
+       // anh: document.getElementById("anh").value,
+        kynang: document.getElementById("kynang").value,
+
+
        
       };
-      var f = await fetch("http://localhost:8008/sinhvien/capnhatmatkhau", {
+      var f = await fetch("http://localhost:8008/sinhvien/capnhatthongtin", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

@@ -5,11 +5,7 @@ const Sinhvien = db.sinhvien;
 
 exports.nopdoan = (req, res) => {
   const sinhvien = req.session.sinhvien;
-  if (
-    sinhvien.IDlop == null ||
-    sinhvien.IDdetai == null ||
-    sinhvien.IDgiangvien == null
-  ) {
+  if (sinhvien.IDdetai == null || sinhvien.IDgiangvien == null) {
     return res.json({
       message: "Bạn chưa chọn đề tài hoặc giảng viên hướng dẫn !",
     });

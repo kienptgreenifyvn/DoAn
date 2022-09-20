@@ -420,6 +420,22 @@ exports.quanlydoanhuongdan = (req, res) => {
   });
 };
 
+exports.xoa_quanlydoanhuongdan = async (req, res) => {
+  console.log("kien");
+  console.log(req.params.IDdetai);
+  await Detai.destroy({
+    where: {
+      IDdetai: req.params.IDdetai,
+    },
+  })
+    .then(() => {
+      res.redirect("../../../giangvien/doandahuongdan");
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.sendMail = (req, res) => {
   const giangvien = req.session.giangvien;
   pool_db.connect(function (err, client, done) {

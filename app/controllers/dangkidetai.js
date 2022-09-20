@@ -180,7 +180,7 @@ exports.dangky_topic = (req, res) => {
       return console.error("error", err);
     }
     client.query(
-      `SELECT detais."tendetai",giangviens.*, chudes."tenchude" FROM detais inner join giangviens on giangviens."IDgiangvien" = detais."IDgiangvien"  inner join chudes on detais."IDchude" = chudes."IDchude" where giangviens."IDgiangvien" = ${giangvien.IDgiangvien} `,
+      `SELECT detais."tendetai",detais."IDdetai",giangviens.*, chudes."tenchude" FROM detais inner join giangviens on giangviens."IDgiangvien" = detais."IDgiangvien"  inner join chudes on detais."IDchude" = chudes."IDchude" where giangviens."IDgiangvien" = ${giangvien.IDgiangvien} `,
       function (err, result) {
         done();
         if (err) {
@@ -248,4 +248,39 @@ exports.them_dangkytopic = async (req, res) => {
       }
     );
   });
+};
+
+exports.capnhat_detai = async (req, res) => {
+  await Detai.update(
+    {
+      IDdetai: req.params.IDdetai,
+      tendetai: req.body.tendetai,
+      IDchude: req.body.IDchude,
+    },
+    {
+      where: {
+        IDdetai: req.params.IDdetai,
+      },
+    }
+  )
+    .then(() => {
+      res.redirect("../../../giangvien/dangkytopic");
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.xoa_detai = async (req, res) => {
+  await Detai.destroy({
+    where: {
+      IDdetai: req.params.IDdetai,
+    },
+  })
+    .then(() => {
+      res.redirect("../../../giangvien/dangkytopic");
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
 };
