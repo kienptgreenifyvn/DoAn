@@ -254,7 +254,7 @@
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" style="width: 700px">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel" style="color: #4e73df">Cập nhật chuyên ngành
                                 </h5>
@@ -301,7 +301,7 @@
              <div class="modal fade" id="detailcate<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 700px">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel" style="color: #4e73df">Chi tiết chuyên ngành</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -414,9 +414,9 @@
                 <div class="modal fade" id="importExcel<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" style="width: 700px">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" style="color: #4e73df">Thêm danh sách sinh viên đủ điều kiện</i></h5>
+                                <h5 class="modal-title" id="exampleModalLabel" style="color: #4e73df">Sinh viên đủ điều kiện</i></h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -431,6 +431,7 @@
                                     />
                                   </div>
                                   <div class="form-group">
+                                    <label for="exampleInputPassword1">Danh sách sinh viên đủ điều kiện làm đồ án tốt nghiệp</label>
                                   <input
                                       class="form-control"
                                       type="file"
@@ -438,6 +439,41 @@
                                       multiple
                                       required
                                       />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Đợt bảo vệ</label>
+                                    <select class="form-control" name="dotbaove" id="dotbaove">
+                                        <option value="1">
+                                            1
+                                        </option>
+                                        <option value="2">
+                                            2
+                                        </option>
+                                        <option value="3">
+                                            3
+                                        </option>
+                                        <option value="4">
+                                            4
+                                        </option>
+                                        <option value="5">
+                                            5
+                                        </option>
+                                        <option value="6">
+                                            6
+                                        </option>
+                                        <option value="7">
+                                            7
+                                        </option>
+                                        <option value="8">
+                                            8
+                                        </option>
+                                        <option value="9">
+                                            9
+                                        </option>
+                                        <option value="10">
+                                            10
+                                        </option>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Thêm danh sách
                                     </button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -455,7 +491,7 @@
                     <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="width: 700px">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel" style="color: #4e73df">Thêm mới chuyên ngành</i></h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -510,6 +546,7 @@
                         $(".importExcel").click(async function () { var data = await {
                       IDdonvi: document.getElementById("IDdonvi").value,
                       file: document.getElementById("files").value,
+                      dotbaove: document.getElementById("dotbaove").value,
                      
                     };
                     var f = await fetch("http://localhost:8008/quanly/chuyennghanh/upload", {

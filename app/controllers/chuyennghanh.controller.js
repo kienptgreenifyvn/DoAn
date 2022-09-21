@@ -41,6 +41,8 @@ exports.upload = async (req, res) => {
             kynang: row[11],
             isActive: false,
             isBook: false,
+            dotbaove: req.body.dotbaove,
+            namthuchien: new Date().getFullYear(),
             IDdonvi: req.body.IDdonvi,
             IDlop: row[12],
             id: row[0],

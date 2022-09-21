@@ -40,6 +40,12 @@ module.exports = (sequelize, Sequelize) => {
     anhsinhvien: {
       type: Sequelize.STRING,
     },
+    dotbaove: {
+      type: Sequelize.STRING,
+    },
+    namthuchien: {
+      type: Sequelize.STRING,
+    },
     isActive: {
       type: Sequelize.BOOLEAN,
       default: false,
