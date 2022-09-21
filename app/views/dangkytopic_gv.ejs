@@ -117,7 +117,7 @@
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=giangvien.tengiangvien %> </span>
                               <img class="img-profile rounded-circle"
-                                  src="http://localhost:8008/backend/img/undraw_profile.svg">
+                                  src="http://localhost:8008/uploads/<%=giangvien.anhgiangvien %>">
                           </a>
                           <!-- Dropdown - User Information -->
                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -230,14 +230,18 @@
                 </button>
             </div>
             <div class="modal-body">
+              <div class="form-group">
+              
+                <input type="hidden" class="form-control" name="IDdetai" id="IDdetais" value="<%= ds_gv.IDdetai%>" >
+            </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Tên Đề tài</label>
-                    <input type="text" class="form-control" name="tendetai" value="<%= ds_gv.tendetai %>" >
+                    <input type="text" class="form-control" name="tendetai" id="tendetais" value="<%= ds_gv.tendetai %>" >
                 </div>
             
               <div class="form-group">
                   <label for="exampleInputPassword1">Chọn chủ đề</label>
-                  <select name="IDchude" class="form-control">
+                  <select name="IDchude" id="IDchudes" class="form-control">
                     <option value="<%= ds_gv.IDchude %>">
                       <%= ds_gv.tenchude %>
                   </option>
@@ -248,11 +252,8 @@
                           <% }); %>
                   </select>
               </div>
-              <button type="submit" class="btn btn-primary" style="width: 120px;" data-dismiss="modal">Thêm đề tài</button>
+              <button type="submit" class="btn btn-primary capnhat" style="width: 120px;" data-dismiss="modal">Thêm đề tài</button>
             </div>
-          
-           
-            
         </div>
     </div>
 </div>
@@ -324,5 +325,31 @@
     
 });
     </script>
+
+<script>
+  $(document).ready(function () {
+    $(".capnhat").click(async function () { var data = await {
+      IDdetai: document.getElementById("IDdetais").value,
+      tendetai: document.getElementById("tendetais").value,
+      IDchude: document.getElementById("IDchudes").value,
+ 
+};
+var f = await fetch("http://localhost:8008/giangvien/sua_dangkytopic", {
+  method: "POST", // or 'PUT'
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+}).then(response => response.json())
+.then(data => {notify(data.message);setTimeout(() => {
+location.reload()
+}, 1000);});
+});
+
+
+    
+
+});
+</script>
   </body>
 </html>

@@ -253,20 +253,22 @@ exports.them_dangkytopic = async (req, res) => {
 exports.capnhat_detai = async (req, res) => {
   await Detai.update(
     {
-      IDdetai: req.params.IDdetai,
+      IDdetai: Number(req.body.IDdetai),
       tendetai: req.body.tendetai,
+      IDhoidong: 1,
       IDchude: req.body.IDchude,
     },
     {
       where: {
-        IDdetai: req.params.IDdetai,
+        IDdetai: Number(req.body.IDdetai),
       },
     }
   )
     .then(() => {
-      res.redirect("../../../giangvien/dangkytopic");
+      res.json("../../../giangvien/dangkytopic");
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send({ message: err.message });
     });
 };
