@@ -6,9 +6,7 @@ const Sinhvien = db.sinhvien;
 exports.nopdoan = (req, res) => {
   const sinhvien = req.session.sinhvien;
   if (sinhvien.IDdetai == null || sinhvien.IDgiangvien == null) {
-    return res.json({
-      message: "Bạn chưa chọn đề tài hoặc giảng viên hướng dẫn !",
-    });
+    return res.render("./chuanopdoan.ejs", { sinhvien });
   }
 
   pool_db.connect(function (err, client, done) {
