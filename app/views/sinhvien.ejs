@@ -187,6 +187,42 @@
 
             </div>
             <div class="card-body">
+                <div style="margin-bottom: 30px; margin-left: 150px">
+                    <form
+                      action="/quanly/loc_sinhvien"
+                      method="POST"
+                      enctype="application/x-www-form-urlencoded"
+                    >
+                      <table>
+                        <tr>
+                          <th style=" padding-left: 50px;">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Chuyên ngành</label
+                              >
+                              <select class="form-control" name="IDdonvi">
+                                <option value="">Chọn đơn vị</option>
+                                <% donvi.rows.forEach(function(donvi){ %>
+                                <option value="<%= donvi.IDdonvi %>">
+                                  <%= donvi.tendonvi %>
+                                </option>
+                                <% }); %>
+                              </select>
+                            </div>
+                          </th>
+                          <th style=" padding-left: 50px;">
+                            <button
+                              type="submit"
+                              style="margin-top: 15px"
+                              class="btn btn-primary"
+                            >
+                              Tìm kiếm
+                            </button>
+                          </th>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>

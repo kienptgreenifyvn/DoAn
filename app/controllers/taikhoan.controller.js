@@ -5,9 +5,43 @@ const config = require("../config/auth.config");
 var bcrypt = require("bcryptjs");
 
 exports.danhsach_taikhoan = (req, res) => {
-  User.findAll().then((ds_taikhoan) => {
-    // res.json(ds_khoa);
-    res.render("./taikhoan.ejs", { DS_taikhoan: ds_taikhoan });
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(`SELECT * FROM users`, function (err, result) {
+      done();
+
+      if (err) {
+        res.end();
+        return console.error("error running query", err);
+      } else {
+        const ds_taikhoan = result;
+        res.render("./taikhoan.ejs", { DS_taikhoan: ds_taikhoan });
+      }
+    });
+  });
+};
+
+exports.loc_danhsach_taikhoan = (req, res) => {
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(
+      `SELECT * FROM users where users.role = '${req.body.role}'`,
+      function (err, result) {
+        done();
+
+        if (err) {
+          res.end();
+          return console.error("error running query", err);
+        } else {
+          const ds_taikhoan = result;
+          res.render("./taikhoan.ejs", { DS_taikhoan: ds_taikhoan });
+        }
+      }
+    );
   });
 };
 

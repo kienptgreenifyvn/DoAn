@@ -202,6 +202,206 @@ exports.danhsach_sinhvien = (req, res) => {
   });
 };
 
+exports.loc_danhsach_sinhvien = (req, res) => {
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(
+      `SELECT * FROM sinhviens inner join lops on sinhviens."IDlop" = lops."IDlop" inner join users on sinhviens."id" = users."id" inner join donvis on sinhviens."IDdonvi" = donvis."IDdonvi" where 1 = 1 ${
+        req.body.IDdonvi != ""
+          ? ` and sinhviens."IDdonvi" = ${req.body.IDdonvi}`
+          : ""
+      }`,
+      function (err, result) {
+        done();
+
+        if (err) {
+          res.end();
+          return console.error("error running query", err);
+        } else {
+          var ds_sinhvien = result;
+          pool_db.connect(function (err, client, done) {
+            if (err) {
+              return console.error("error", err);
+            }
+            client.query(`SELECT * FROM lops`, function (err, result) {
+              done();
+
+              if (err) {
+                res.end();
+                return console.error("error running query", err);
+              } else {
+                var lop = result;
+                pool_db.connect(function (err, client, done) {
+                  if (err) {
+                    return console.error("error", err);
+                  }
+                  client.query(`SELECT * FROM donvis`, function (err, result) {
+                    done();
+
+                    if (err) {
+                      res.end();
+                      return console.error("error running query", err);
+                    } else {
+                      var donvi = result;
+                      pool_db.connect(function (err, client, done) {
+                        if (err) {
+                          return console.error("error", err);
+                        }
+                        client.query(
+                          `SELECT * FROM giangviens`,
+                          function (err, result) {
+                            done();
+
+                            if (err) {
+                              res.end();
+                              return console.error("error running query", err);
+                            } else {
+                              var giangvien = result;
+                              pool_db.connect(function (err, client, done) {
+                                if (err) {
+                                  return console.error("error", err);
+                                }
+                                client.query(
+                                  `SELECT * FROM sinhviens `,
+                                  function (err, result) {
+                                    done();
+
+                                    if (err) {
+                                      res.end();
+                                      return console.error(
+                                        "error running query",
+                                        err
+                                      );
+                                    } else {
+                                      var chon_sinhvien = result;
+                                      pool_db.connect(function (
+                                        err,
+                                        client,
+                                        done
+                                      ) {
+                                        if (err) {
+                                          return console.error("error", err);
+                                        }
+                                        client.query(
+                                          `SELECT * FROM lops where "IDlop" != '${chon_sinhvien.rows[0].IDlop}' `,
+                                          function (err, result) {
+                                            done();
+
+                                            if (err) {
+                                              res.end();
+                                              return console.error(
+                                                "error running query",
+                                                err
+                                              );
+                                            } else {
+                                              var chon_lop = result;
+                                              pool_db.connect(function (
+                                                err,
+                                                client,
+                                                done
+                                              ) {
+                                                if (err) {
+                                                  return console.error(
+                                                    "error",
+                                                    err
+                                                  );
+                                                }
+                                                client.query(
+                                                  `SELECT * FROM donvis where "IDdonvi" != ${chon_sinhvien.rows[0].IDdonvi} `,
+                                                  function (err, result) {
+                                                    done();
+
+                                                    if (err) {
+                                                      res.end();
+                                                      return console.error(
+                                                        "error running query",
+                                                        err
+                                                      );
+                                                    } else {
+                                                      var chon_donvi = result;
+
+                                                      pool_db.connect(function (
+                                                        err,
+                                                        client,
+                                                        done
+                                                      ) {
+                                                        if (err) {
+                                                          return console.error(
+                                                            "error",
+                                                            err
+                                                          );
+                                                        }
+                                                        client.query(
+                                                          `SELECT * FROM giangviens where "IDgiangvien" != ${chon_sinhvien.rows[0].IDgiangvien} `,
+                                                          function (
+                                                            err,
+                                                            result
+                                                          ) {
+                                                            done();
+
+                                                            if (err) {
+                                                              res.end();
+                                                              return console.error(
+                                                                "error running query",
+                                                                err
+                                                              );
+                                                            } else {
+                                                              var chon_giangvien =
+                                                                result;
+                                                              res.render(
+                                                                "./sinhvien.ejs",
+                                                                {
+                                                                  chon_sinhvien:
+                                                                    chon_sinhvien
+                                                                      .rows[0],
+                                                                  chon_lop:
+                                                                    chon_lop,
+                                                                  chon_donvi:
+                                                                    chon_donvi,
+                                                                  lop: lop,
+                                                                  ds_sinhvien:
+                                                                    ds_sinhvien,
+                                                                  donvi: donvi,
+                                                                  giangvien:
+                                                                    giangvien,
+                                                                  chon_giangvien:
+                                                                    chon_giangvien,
+                                                                }
+                                                              );
+                                                            }
+                                                          }
+                                                        );
+                                                      });
+                                                    }
+                                                  }
+                                                );
+                                              });
+                                            }
+                                          }
+                                        );
+                                      });
+                                    }
+                                  }
+                                );
+                              });
+                            }
+                          }
+                        );
+                      });
+                    }
+                  });
+                });
+              }
+            });
+          });
+        }
+      }
+    );
+  });
+};
+
 exports.them_sinhvien = async (req, res) => {
   try {
     const {

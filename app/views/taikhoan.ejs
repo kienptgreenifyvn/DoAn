@@ -187,6 +187,41 @@
 
             </div>
             <div class="card-body">
+                <div style="margin-bottom: 30px; margin-left: 150px">
+                    <form
+                      action="/quanly/loc_taikhoan"
+                      method="POST"
+                      enctype="application/x-www-form-urlencoded"
+                    >
+                      <table>
+                        <tr>
+                          <th style=" padding-left: 50px; text-align: center;">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Tài khoản</label
+                              >
+                              <select class="form-control" name="role">
+                                <option value="giangvien">Giảng viên</option>
+                                <option value="sinhvien">
+                                 Sinh viên
+                                </option>
+                               
+                              </select>
+                            </div>
+                          </th>
+                          <th style=" padding-left: 50px;">
+                            <button
+                              type="submit"
+                              style="margin-top: 15px"
+                              class="btn btn-primary"
+                            >
+                              Tìm kiếm
+                            </button>
+                          </th>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -199,38 +234,38 @@
                         </thead>
 
                         <tbody>
-                            <% for (let index=0; index < DS_taikhoan.length; index++) {%>
+                            <% DS_taikhoan.rows.forEach(function(DS_taikhoan){ %>
                                 <tr>
                                     <td>
-                                        <%= DS_taikhoan[index].dataValues.id %>
+                                        <%= DS_taikhoan.id %>
                                     </td>
                                     <td>
 
-                                        <%= DS_taikhoan[index].dataValues.email %>
+                                        <%= DS_taikhoan.email %>
                                     </td>
                                     <td>
 
-                                        <%= DS_taikhoan[index].dataValues.password %>
+                                        <%= DS_taikhoan.password %>
                                     </td>
                                     <td>
                                        
                                            
                                             <ul style="list-style: none;display: flex;">
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#detailcate<%=DS_taikhoan[index].dataValues.id %>">
+                                                        data-target="#detailcate<%=DS_taikhoan.id %>">
                                                         <i class="fas fa-eye"
                                                             style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
                                                     </a>
                                                 </li>
 
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#updatecate<%=DS_taikhoan[index].dataValues.id %>">
+                                                        data-target="#updatecate<%=DS_taikhoan.id %>">
                                                         <i class='fas fa-pencil-ruler'
                                                             style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
                                                     </a>
                                                 </li>
                                                 <li> <a 
-                                                        href="./taikhoan/xoa_taikhoan/<%= DS_taikhoan[index].dataValues.id %>"
+                                                        href="./taikhoan/xoa_taikhoan/<%= DS_taikhoan.id %>"
                                                         onclick=" confirm('Are you sure you want to delete this item?');"><i
                                                             class="fas fa-trash"
                                                             style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
@@ -239,17 +274,16 @@
                                        
                                     </td>
                                 </tr>
-                                <%}%>
+                                <% }); %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-       
-        <% for (let index=0; index < DS_taikhoan.length; index++) {%>
-            <form action="/quanly/taikhoan/sua_taikhoan/<%=DS_taikhoan[index].dataValues.id %>" method="POST"
+        <% DS_taikhoan.rows.forEach(function(DS_taikhoan){ %>
+            <form action="/quanly/taikhoan/sua_taikhoan/<%=DS_taikhoan.id %>" method="POST"
                 enctype="application/x-www-form-urlencoded">
-                <div class="modal fade" id="updatecate<%=DS_taikhoan[index].dataValues.id %>" tabindex="-1"
+                <div class="modal fade" id="updatecate<%=DS_taikhoan.id %>" tabindex="-1"
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
@@ -265,17 +299,17 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">ID tài khoản</label>
                                     <input type="text" class="form-control" name="id"
-                                        value="<%=DS_taikhoan[index].dataValues.id %>">
+                                        value="<%=DS_taikhoan.id %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Email</label>
                                     <input type="text" class="form-control" name="email"
-                                        value="<%=DS_taikhoan[index].dataValues.email %>">
+                                        value="<%=DS_taikhoan.email %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mật khẩu</label>
                                     <input type="text" class="form-control" name="password"
-                                        value="<%=DS_taikhoan[index].dataValues.password %>">
+                                        value="<%=DS_taikhoan.password %>">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="/quanly/taikhoan" class="btn btn-primary">Trở lại</a>
@@ -287,7 +321,7 @@
             </form>
 
 
-             <div class="modal fade" id="detailcate<%=DS_taikhoan[index].dataValues.id %>" tabindex="-1" role="dialog"
+             <div class="modal fade" id="detailcate<%=DS_taikhoan.id %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -303,14 +337,14 @@
                                     <tr>
                                         <th>Mã tài khoản</th>
                                         <td>
-                                            <%= DS_taikhoan[index].dataValues.id %>
+                                            <%= DS_taikhoan.id %>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Email</th>
                                         <td>
-                                            <%= DS_taikhoan[index].dataValues.email %>
+                                            <%= DS_taikhoan.email %>
                                         </td>
 
                                     </tr>
@@ -318,7 +352,7 @@
                                     <tr>
                                         <th>Mật khẩu</th>
                                         <td>
-                                            <%= DS_taikhoan[index].dataValues.password %>
+                                            <%= DS_taikhoan.password %>
                                         </td>
 
                                     </tr>
@@ -332,7 +366,7 @@
                 </div>
             </div> 
 
-            <%}%>
+            <% }); %>
                 </div>
                 <form action="/quanly/taikhoan/them_taikhoan" method="POST" enctype="application/x-www-form-urlencoded">
 

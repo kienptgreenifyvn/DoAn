@@ -22,6 +22,7 @@ module.exports = function (app) {
     next();
   });
   app.get("/quanly/sinhvien", controller.danhsach_sinhvien);
+  app.post("/quanly/loc_sinhvien", controller.loc_danhsach_sinhvien);
   app.post(
     "/quanly/sinhvien/them_sinhvien",
     upload.single("file"),
