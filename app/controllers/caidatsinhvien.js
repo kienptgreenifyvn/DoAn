@@ -99,18 +99,17 @@ exports.capnhatmatkhau_gv = async (req, res) => {
 };
 
 exports.caidatquanly = (req, res) => {
-  // const sinhvien = req.session.sinhvien;
-  res.render("./caidatquanly.ejs");
+  const user = req.session.user;
+  res.render("./caidatquanly.ejs", { user });
 };
 
 exports.capnhatmatkhau_ql = async (req, res) => {
   try {
-    //const sinhvien = req.session.sinhvien;
+    const user = req.session.user;
     const { password, passwordOld, passwordNew } = req.body;
-
     const tonTaiMk = await User.findOne({
       where: {
-        id: sinhvien.id,
+        id: user.id,
       },
     });
 
@@ -131,7 +130,7 @@ exports.capnhatmatkhau_ql = async (req, res) => {
 
     await User.update(newUser, {
       where: {
-        id: sinhvien.id,
+        id: user.id,
       },
     });
     return res.status(400).json({
