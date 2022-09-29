@@ -29,4 +29,10 @@ module.exports = function (app) {
     permission.requireLogin,
     controller.capnhatmatkhau_gv
   );
+  app.get("/quanly/caidat", permission.requireLogin, controller.caidatquanly);
+  app.post(
+    "/quanly/capnhatmatkhau_ql",
+    permission.requireLogin,
+    controller.capnhatmatkhau_ql
+  );
 };
