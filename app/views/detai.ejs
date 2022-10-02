@@ -187,17 +187,100 @@
 
             </div>
             <div class="card-body">
+                <div style="margin-bottom: 30px; margin-left: 150px">
+                    <form
+                      action="/quanly/loc_detai"
+                      method="POST"
+                      enctype="application/x-www-form-urlencoded"
+                    >
+                      <table style="text-align: center;">
+                        <tr>
+                          <th >
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Chuyên ngành</label
+                              >
+                              <select class="form-control" name="IDdonvi">
+                                <option value="">Chọn chuyên ngành</option>
+                                <% donvi.rows.forEach(function(donvi){ %>
+                                <option value="<%= donvi.IDdonvi %>">
+                                  <%= donvi.tendonvi %>
+                                </option>
+                                <% }); %>
+                              </select>
+                            </div>
+                          </th>
+                          <th style=" padding-left: 20px;">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Chủ đề</label
+                              >
+                              <select class="form-control" name="IDchude">
+                                <option value="">Chọn chủ đề</option>
+                                <% chude.rows.forEach(function(chude){ %>
+                                <option value="<%= chude.IDchude %>">
+                                  <%= chude.tenchude %>
+                                </option>
+                                <% }); %>
+                              </select>
+                            </div>
+                          </th>
+                          <th style=" padding-left: 20px;">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Năm</label
+                              >
+                              <select class="form-control" name="nam">
+                                <option value="">Chọn năm</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+
+                              </select>
+                            </div>
+                          </th>
+                        
+                          <th style=" padding-left: 20px;">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1"
+                                >Đánh giá</label
+                              >
+                              <select class="form-control" name="isActive">
+                                <option value="">Chọn đánh giá</option>
+                                <option value="true">Đạt</option>
+                                <option value="false">Không đạt</option>
+                              </select>
+                            </div>
+                          </th>
+                          <th style=" padding-left: 40px;">
+                            <button
+                              type="submit"
+                              style="margin-top: 15px"
+                              class="btn btn-primary"
+                            >
+                              Tìm kiếm
+                            </button>
+                          </th>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Mã đề tài</th>
                                 <th>Tên đề tài</th>
-                                <th>Tên sinh viên</th>
+                                <th>Sinh viên thực hiện</th>
+                                <th>Giảng viên hướng dẫn</th>
                                 <th>Số sinh viên tham gia</th>
                                 <th>Năm thực hiện</th>
-                                <th>Source code</th>
-                                <th>Hội Đồng</th>
                                 <th>Tùy chọn</th>
                             </tr>
                         </thead>
@@ -205,9 +288,6 @@
                         <tbody>
                             <% ds_detai.rows.forEach(function(ds_detai){ %>
                                 <tr>
-                                    <td>
-                                        <%= ds_detai.IDdetai %>
-                                    </td>
                                     <td>
 
                                         <%= ds_detai.tendetai %>
@@ -218,24 +298,17 @@
                                     </td>
                                     <td>
 
-                                        <%= ds_detai.sosinhvienthamgia %>
+                                        <%= ds_detai.tengiangvien %>
+                                    </td>
+                                    <td>
+                                        1
                                     </td>
                                     <td>
 
-                                        <%= ds_detai.nam %>
-                                    </td>
-                                    <td>
-
-                                        <%= ds_detai.sourcecode %>
-                                    </td>
-                                    <td>
-
-                                        <%= ds_detai.chutichhoidong %>
+                                        <%= ds_detai.namthuchien %>
                                     </td>
                                     
                                     <td>
-                                       
-                                           
                                             <ul style="list-style: none;display: flex;">
                                                 <li> <a  href="#" data-toggle="modal"
                                                         data-target="#detailcate<%=ds_detai.IDdetai %>">
@@ -257,7 +330,6 @@
                                                             style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
                                                 </li>
                                             </ul>
-                                       
                                     </td>
                                 </tr>
                                 <% }); %>
@@ -370,6 +442,13 @@
 
                                     </tr>
                                     <tr>
+                                        <th>Chủ đề</th>
+                                        <td>
+                                            <%= ds_detai.tenchude %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
                                         <th>Sinh viên thực hiện</th>
                                         <td>
                                             <%= ds_detai.tensinhvien %>
@@ -377,23 +456,32 @@
 
                                     </tr>
                                     <tr>
+                                        <th>Giảng viên hướng dẫn</th>
+                                        <td>
+                                            <%= ds_detai.tengiangvien %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
                                         <th>Số sinh viên tham gia</th>
                                         <td>
-                                            <%= ds_detai.sosinhvienthamgia %>
+                                            1
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Năm thực hiện </th>
                                         <td>
-                                            <%= ds_detai.nam %>
+                                            <%= ds_detai.namthuchien %>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Source code</th>
-                                        <td>
-                                            <%= ds_detai.sourcecode %>
+                                        <td><a
+                                            href="http://localhost:8008/uploads/<%= ds_detai.sourcecode %>"
+                                            ><%= ds_detai.sourcecode %></a
+                                          >
                                         </td>
 
                                     </tr>
@@ -401,13 +489,6 @@
                                         <th>Nhận xét chung</th>
                                         <td>
                                             <%= ds_detai.nhanxetchung %>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <th>Chủ đề</th>
-                                        <td>
-                                            <%= ds_detai.tenchude %>
                                         </td>
 
                                     </tr>
