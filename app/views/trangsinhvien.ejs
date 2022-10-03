@@ -190,7 +190,8 @@
                   <tr>
                     <td>
                       <a
-                        href="#"
+                        href="#" data-toggle="modal"
+                        data-target="#detailcate<%=tintuc.IDtintuc %>"
                         style="
                           color: #495057;
                           font-weight: bold;
@@ -212,6 +213,52 @@
           </div>
         </div>
       </div>
+
+      
+      <% tintuc.rows.forEach(function(tintuc){ %>
+        <div class="modal fade" id="detailcate<%=tintuc.IDtintuc %>" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 800px">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chi tiết sinh viên</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered" >
+                            <tbody>
+                                <tr>
+                                    <th>Chủ đề</th>
+                                    <td>
+                                        <%= tintuc.chude %>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <td>
+                                      <img src="http://localhost:8008/uploads/<%= tintuc.anhtintuc %>"
+                                      style=" width: 150px;" /> 
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th>Nội dung</th>
+                                    <td>
+                                        <%= tintuc.noidung %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% }); %>
 
       <!-- Pie Chart -->
       <div class="col-xl-5 col-lg-5">
