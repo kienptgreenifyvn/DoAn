@@ -441,7 +441,7 @@
                             <table class="table table-bordered" >
                                 <tbody>
                                     <tr>
-                                        <th>ID sinh viên</th>
+                                        <th>Mã sinh viên</th>
                                         <td>
                                             <%= ds_sinhvien.IDsinhvien %>
                                         </td>
@@ -483,6 +483,14 @@
 
                                     </tr>
                                     <tr>
+                                        <th>Ảnh sinh viên </th>
+                                        <td>
+                                            <img src="http://localhost:8008/uploads/<%= ds_sinhvien.anhsinhvien %>"
+                                            style=" width: 150px;" />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
                                         <th>Quê quán </th>
                                         <td>
                                             <%= ds_sinhvien.quequan %>
@@ -492,7 +500,9 @@
                                     <tr>
                                         <th>Source code </th>
                                         <td>
-                                           <%= ds_sinhvien.sourcecode %>
+                                           
+                                           <img src="http://localhost:8008/uploads/<%= ds_sinhvien.sourcecode %>"
+                                           />
                                         </td>
 
                                     </tr>
