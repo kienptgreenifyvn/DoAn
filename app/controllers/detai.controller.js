@@ -125,20 +125,61 @@ exports.danhsach_detai = (req, res) => {
                                                         );
                                                       } else {
                                                         var donvi = result;
-                                                        res.render(
-                                                          "./detai.ejs",
-                                                          {
-                                                            chon_detai:
-                                                              chon_detai
-                                                                .rows[0],
-                                                            chon_chude:
-                                                              chon_chude,
-                                                            chon_hoidong:
-                                                              chon_hoidong,
-                                                            chude: chude,
-                                                            ds_detai: ds_detai,
-                                                            hoidong: hoidong,
-                                                            donvi: donvi,
+                                                        pool_db.connect(
+                                                          function (
+                                                            err,
+                                                            client,
+                                                            done
+                                                          ) {
+                                                            if (err) {
+                                                              return console.error(
+                                                                "error",
+                                                                err
+                                                              );
+                                                            }
+                                                            client.query(
+                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true `,
+                                                              function (
+                                                                err,
+                                                                result
+                                                              ) {
+                                                                done();
+
+                                                                if (err) {
+                                                                  res.end();
+                                                                  return console.error(
+                                                                    "error running query",
+                                                                    err
+                                                                  );
+                                                                } else {
+                                                                  var dachon =
+                                                                    result;
+
+                                                                  res.render(
+                                                                    "./detai.ejs",
+                                                                    {
+                                                                      chon_detai:
+                                                                        chon_detai
+                                                                          .rows[0],
+                                                                      chon_chude:
+                                                                        chon_chude,
+                                                                      chon_hoidong:
+                                                                        chon_hoidong,
+                                                                      chude:
+                                                                        chude,
+                                                                      ds_detai:
+                                                                        ds_detai,
+                                                                      hoidong:
+                                                                        hoidong,
+                                                                      donvi:
+                                                                        donvi,
+                                                                      dachon:
+                                                                        dachon,
+                                                                    }
+                                                                  );
+                                                                }
+                                                              }
+                                                            );
                                                           }
                                                         );
                                                       }
@@ -307,20 +348,61 @@ exports.loc_danhsach_detai = (req, res) => {
                                                         );
                                                       } else {
                                                         var donvi = result;
-                                                        res.render(
-                                                          "./detai.ejs",
-                                                          {
-                                                            chon_detai:
-                                                              chon_detai
-                                                                .rows[0],
-                                                            chon_chude:
-                                                              chon_chude,
-                                                            chon_hoidong:
-                                                              chon_hoidong,
-                                                            chude: chude,
-                                                            ds_detai: ds_detai,
-                                                            hoidong: hoidong,
-                                                            donvi: donvi,
+                                                        pool_db.connect(
+                                                          function (
+                                                            err,
+                                                            client,
+                                                            done
+                                                          ) {
+                                                            if (err) {
+                                                              return console.error(
+                                                                "error",
+                                                                err
+                                                              );
+                                                            }
+                                                            client.query(
+                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true `,
+                                                              function (
+                                                                err,
+                                                                result
+                                                              ) {
+                                                                done();
+
+                                                                if (err) {
+                                                                  res.end();
+                                                                  return console.error(
+                                                                    "error running query",
+                                                                    err
+                                                                  );
+                                                                } else {
+                                                                  var dachon =
+                                                                    result;
+
+                                                                  res.render(
+                                                                    "./detai.ejs",
+                                                                    {
+                                                                      chon_detai:
+                                                                        chon_detai
+                                                                          .rows[0],
+                                                                      chon_chude:
+                                                                        chon_chude,
+                                                                      chon_hoidong:
+                                                                        chon_hoidong,
+                                                                      chude:
+                                                                        chude,
+                                                                      ds_detai:
+                                                                        ds_detai,
+                                                                      hoidong:
+                                                                        hoidong,
+                                                                      donvi:
+                                                                        donvi,
+                                                                      dachon:
+                                                                        dachon,
+                                                                    }
+                                                                  );
+                                                                }
+                                                              }
+                                                            );
                                                           }
                                                         );
                                                       }
@@ -350,6 +432,50 @@ exports.loc_danhsach_detai = (req, res) => {
       }
     );
   });
+};
+
+exports.dat = async (req, res) => {
+  await Detai.update(
+    {
+      isActive: true,
+    },
+    {
+      where: {
+        IDdetai: +req.body.IDdetai,
+      },
+    }
+  )
+    .then(() => {
+      res.json({
+        message: "Đánh giá thành công !",
+      });
+      //res.status(200).redirect("../../giangvien/dssinhviendangky");
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.khongdat = async (req, res) => {
+  await Detai.update(
+    {
+      isActive: false,
+    },
+    {
+      where: {
+        IDdetai: +req.body.IDdetai,
+      },
+    }
+  )
+    .then(() => {
+      res.json({
+        message: "Đánh giá thành công !",
+      });
+      //res.status(200).redirect("../../giangvien/dssinhviendangky");
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
 };
 
 exports.them_detai = (req, res) => {

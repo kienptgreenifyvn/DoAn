@@ -33,6 +33,11 @@ module.exports = function (app) {
     requireLogin,
     controller.quanlydoanhuongdan
   );
+  app.post(
+    "/giangvien/loc_quanlydoanhuongdan",
+    requireLogin,
+    controller.loc_quanlydoanhuongdan
+  );
   app.get(
     "/giangvien/xoa_doandahuongdan/:IDdetai",
     requireLogin,

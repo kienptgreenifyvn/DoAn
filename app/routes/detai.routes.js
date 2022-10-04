@@ -22,6 +22,8 @@ module.exports = function (app) {
   });
   app.get("/quanly/detai", controller.danhsach_detai);
   app.post("/quanly/loc_detai", controller.loc_danhsach_detai);
+  app.post("/quanly/detai/dat", controller.dat);
+  app.post("/quanly/detai/khongdat", controller.khongdat);
   app.post(
     "/quanly/detai/them_detai",
     upload.single("image"),

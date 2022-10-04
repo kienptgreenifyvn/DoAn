@@ -42,7 +42,7 @@
           </li>
 		    <li class="nav-item">
             <a class="nav-link" href="/sinhvien/danhsachgiangvien">
-                  <i class="fas fa-fw fa-chart-area"></i>
+                  <i class="fas fa-calendar"></i>
                   <span>Tìm kiếm giảng viên <span></a>
           </li>
           <li class="nav-item">
@@ -52,7 +52,7 @@
         </li> 
 		     <li class="nav-item">
             <a class="nav-link dangky" href="/sinhvien/nopdoan">
-                <i class="fas fa-fw fa-table"></i>
+                <i class="fab fa-jedi-order"></i>
                 <span>Nộp đồ án</span></a>
         </li>
       
@@ -221,33 +221,32 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="width: 800px">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Chi tiết sinh viên</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tin tức</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <table class="table table-bordered" >
+                        <table >
                             <tbody>
                                 <tr>
-                                    <th>Chủ đề</th>
+                                    
                                     <td>
-                                        <%= tintuc.chude %>
+                                       <h3><%= tintuc.chude %></h3><br>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <th>Ảnh</th>
-                                    <td>
+                                
+                                    <td style="text-align: center;">
                                       <img src="http://localhost:8008/uploads/<%= tintuc.anhtintuc %>"
-                                      style=" width: 150px;" /> 
+                                     style="width: 300px; height: auto;"/> <br>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <th>Nội dung</th>
                                     <td>
-                                        <%= tintuc.noidung %>
+                                       <br><p><%= tintuc.noidung %></p> 
                                     </td>
                                 </tr>
                             </tbody>
