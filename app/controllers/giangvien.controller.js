@@ -52,7 +52,7 @@ exports.danhsach_giangvien = (req, res) => {
                             return console.error("error", err);
                           }
                           client.query(
-                            `SELECT * FROM donvis where "IDdonvi" != ${chon_giangvien.rows[0].IDdonvi} `,
+                            `SELECT * FROM donvis where "IDdonvi" != ${chon_giangvien.rows[0]?.IDdonvi} `,
                             function (err, result) {
                               done();
 
@@ -138,7 +138,7 @@ exports.loc_danhsach_giangvien = (req, res) => {
                             return console.error("error", err);
                           }
                           client.query(
-                            `SELECT * FROM donvis where "IDdonvi" != ${chon_giangvien.rows[0].IDdonvi} `,
+                            `SELECT * FROM donvis where "IDdonvi" != ${chon_giangvien.rows[0]?.IDdonvi} `,
                             function (err, result) {
                               done();
 

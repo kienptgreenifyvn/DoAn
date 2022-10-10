@@ -93,9 +93,62 @@ exports.upload = async (req, res) => {
 };
 
 exports.danhsach_chuyennghanh = (req, res) => {
-  ChuyenNghanh.findAll().then((ds_chuyennghanh) => {
-    // res.json(ds_khoa);
-    res.render("./chuyennghanh.ejs", { DS_chuyennghanh: ds_chuyennghanh });
+  const dateNow = new Date().getFullYear().toString();
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(`SELECT * FROM donvis`, function (err, result) {
+      done();
+
+      if (err) {
+        res.end();
+        return console.error("error running query", err);
+      } else {
+        const DS_chuyennghanh = result;
+        pool_db.connect(function (err, client, done) {
+          if (err) {
+            return console.error("error", err);
+          }
+          client.query(
+            `SELECT COUNT(*) FROM sinhviens inner join detais on sinhviens."IDdetai" = detais."IDdetai" where sinhviens."dotbaove" = '${dateNow}' and detais."isActive" = true`,
+            function (err, result) {
+              done();
+
+              if (err) {
+                res.end();
+                return console.error("error running query", err);
+              } else {
+                const soluongdat = result;
+                pool_db.connect(function (err, client, done) {
+                  if (err) {
+                    return console.error("error", err);
+                  }
+                  client.query(
+                    `SELECT COUNT(*) FROM sinhviens inner join detais on sinhviens."IDdetai" = detais."IDdetai" inner join donvis on sinhviens."IDdonvi" = donvis."IDdonvi" where sinhviens."dotbaove" = '${dateNow}' and detais."isActive" = false`,
+                    function (err, result) {
+                      done();
+
+                      if (err) {
+                        res.end();
+                        return console.error("error running query", err);
+                      } else {
+                        const soluongkhongdat = result;
+                        res.render("./chuyennghanh.ejs", {
+                          ds_chuyennghanh: DS_chuyennghanh,
+                          soluongdat: soluongdat.rows[0],
+                          soluongkhongdat: soluongkhongdat.rows[0],
+                        });
+                      }
+                    }
+                  );
+                });
+              }
+            }
+          );
+        });
+      }
+    });
   });
 };
 

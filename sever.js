@@ -45,7 +45,6 @@ app.listen(PORT, () => {
 // const reader = require("xlsx");
 
 // // Reading our test file
-// const file = reader.readFile("./app/public/uploads/test.xlsx");
 
 // let data = [];
 

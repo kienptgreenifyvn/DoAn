@@ -7,7 +7,7 @@
       #kc2,
       #kc3,
       #kc5 {
-        padding-left: 50px;
+        padding-left: 15px;
       }
     </style>
   </head>
@@ -18,73 +18,73 @@
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-          <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/giangvien">
-              <div class="sidebar-brand-icon ">
-                  <i class="fas fa-landmark"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3" style="font-size: 13px;">QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP</div>
-          </a>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/giangvien">
+            <div class="sidebar-brand-icon ">
+                <i class="fas fa-landmark"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3" style="font-size: 13px;">QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP</div>
+        </a>
 
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-          <!-- Nav Item - Dashboard -->
-          <li class="nav-item active">
-              <a class="nav-link" href="/giangvien">
-                  <i class="fas fa-fw fa-tachometer-alt"></i>
-                  <span>Trang chủ</span></a>
-          </li>
-       
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/giangvien">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Trang chủ</span></a>
+        </li>
+     
 
-          <!-- Divider -->
-          <hr class="sidebar-divider">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-          <li class="nav-item">
-            <a class="nav-link" href="/giangvien/timkiemdetai">
-                  <i class="fas fa-fw fa-chart-area"></i>
-                  <span>Tìm kiếm đồ án</span></a>
-          </li>
-        
-          <li class="nav-item">
-            <a class="nav-link" href="/giangvien/dangkytopic">
-                  <i class="fas fa-fw fa-chart-area"></i>
-                  <span>Đăng ký topic</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/giangvien/dssinhviendangky">
-                  <i class="fab fa-jedi-order"></i>
-                  <span>Duyệt danh sách đăng ký </span>
-              </a>
-              
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/giangvien/svhuongdanh">
-                <i class="far fa-newspaper"></i>
-                  <span>Sinh viên hướng dẫn</span>
-              </a>
-              
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/giangvien/doandahuongdan">
-                <i class="far fa-newspaper"></i>
-                  <span>Quản lý đồ án hướng dẫn</span>
-              </a>
-              
-          </li>
-          <!-- Nav Item - Charts -->
-        
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item">
+          <a class="nav-link" href="/giangvien/timkiemdetai">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Tìm kiếm đồ án</span></a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/giangvien/dangkytopic">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Đăng ký topic</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/giangvien/dssinhviendangky">
+                <i class="fas fa-calendar"></i>
+                <span>Duyệt danh sách đăng ký </span>
+            </a>
+            
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/giangvien/svhuongdanh">
+              <i class="fas fa-clipboard-check"></i>
+                <span>Sinh viên hướng dẫn</span>
+            </a>
+            
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/giangvien/doandahuongdan">
+              <i class="fab fa-jedi-order"></i>
+                <span>Quản lý đồ án hướng dẫn</span>
+            </a>
+            
+        </li>
+        <!-- Nav Item - Charts -->
+      
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-          <!-- Sidebar Toggler (Sidebar) -->
-          <div class="text-center d-none d-md-inline">
-              <button class="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
-       
+     
 
-      </ul>
+    </ul>
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
@@ -157,7 +157,7 @@
       <div class="card-body">
         <div style="margin-bottom: 30px; margin-left: 150px">
           <form
-            action="/giangvien/loc_quanlyhuongdan"
+            action="/giangvien/loc_quanlydoanhuongdan"
             method="POST"
             enctype="application/x-www-form-urlencoded"
           >
@@ -176,13 +176,49 @@
                     </select>
                   </div>
                 </th>
+                <th id="kc1">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1"
+                      >Chuyên ngành</label
+                    >
+                    <select class="form-control" name="IDdonvi">
+                      <option value="">Chọn chuyên ngành</option>
+                      <% donvi.rows.forEach(function(donvi){ %>
+                      <option value="<%= donvi.IDdonvi %>">
+                        <%= donvi.tendonvi %>
+                      </option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </th>
+                <th id="kc1">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1"
+                      >Năm</label
+                    >
+                    <select class="form-control" name="nam">
+                      <option value="">Chọn năm</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
+                      <option value="2031">2031</option>
+
+                    </select>
+                  </div>
+                </th>
                 <th id="kc5">
                   <button
                     type="submit"
                     style="margin-top: 15px"
                     class="btn btn-primary"
                   >
-                    Seach
+                    Tìm Kiếm
                   </button>
                 </th>
               </tr>
@@ -201,6 +237,7 @@
                 <th>Đề tài đã hướng dẫn</th>
                 <th>Sinh viên đã hướng dẫn</th>
                 <th>Số sinh viên thực hiện</th>
+                <th>Năm thực hiện</th>
                 <th>Tùy chọn</th>
               </tr>
             </thead>
@@ -211,6 +248,7 @@
                 <td><%= huongdan.tendetai %></td>
                 <td><%= huongdan.tensinhvien %></td>
                 <td>1</td>
+                <td><%= huongdan.namthuchien %></td>
                 <td>
                   <!-- Example single danger button -->
                   <div class="btn-group">

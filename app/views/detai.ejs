@@ -4,6 +4,8 @@
 <head>
 
     <%- include("./layout/layout.css.ejs") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
 </head>
 
 <body>
@@ -14,101 +16,101 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quanly">
-                <div class="sidebar-brand-icon ">
-                    <i class="fas fa-landmark"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3" style="font-size: 13px;">QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP</div>
-            </a>
-  
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-  
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/quanly">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Trang chủ</span></a>
-            </li>
-         
-  
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-  
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/chuyennghanh">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Quản lý chuyên ngành</span></a>
-            </li>
-           <li class="nav-item">
-              <a class="nav-link" href="/quanly/chude">
-                  <i class="fas fa-fw fa-table"></i>
-                  <span>Quản lý chủ đề</span></a>
+
+          <!-- Sidebar - Brand -->
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quanly">
+              <div class="sidebar-brand-icon ">
+                  <i class="fas fa-landmark"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3" style="font-size: 13px;">QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP</div>
+          </a>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0">
+
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item active">
+              <a class="nav-link" href="/quanly">
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <span>Trang chủ</span></a>
+          </li>
+       
+
+          <!-- Divider -->
+          <hr class="sidebar-divider">
+
+          <li class="nav-item">
+            <a class="nav-link" href="/quanly/chuyennghanh">
+                  <i class="fas fa-fw fa-chart-area"></i>
+                  <span>Quản lý chuyên ngành</span></a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link" href="/quanly/chude">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Quản lý chủ đề</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/quanly/detai">
+                  <i class="fas fa-clipboard-list"></i>
+                  <span>Quản lý đề tài</span></a>
+          </li>
+
+       
+          <li class="nav-item">
+            <a class="nav-link" href="/quanly/hoidong">
+                  <i class="fas fa-calendar"></i>
+                  <span>Quản lý hội đồng</span></a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/quanly/detai">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Quản lý đề tài</span></a>
-            </li>
-  
-         
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/hoidong">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Quản lý hội đồng</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/lop">
-                    <i class="fab fa-jedi-order"></i>
-                    <span>Quản lý lớp</span>
-                </a>
-                
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/giangvien">
-                  <i class="far fa-newspaper"></i>
-                    <span>Quản lý giảng viên</span>
-                </a>
-                
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/sinhvien">
-                  <i class="far fa-newspaper"></i>
-                    <span>Quản lý sinh viên</span>
-                </a>
-                
-            </li>
+            <a class="nav-link" href="/quanly/lop">
+                  <i class="fab fa-jedi-order"></i>
+                  <span>Quản lý lớp</span>
+              </a>
+              
+          </li>
           <li class="nav-item">
-              <a class="nav-link" href="/quanly/tintuc">
-                  <i class="far fa-newspaper"></i>
-                    <span>Quản lý tin tức</span>
-                </a>
-                
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/quanly/taikhoan">
-                  <i class="far fa-newspaper"></i>
-                    <span >Quản lý tài khoản</span>
-                </a>
-                
-            </li>
-  
-            <!-- Nav Item - Charts -->
-          
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-  
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-  
-         
-  
-        </ul>
+            <a class="nav-link" href="/quanly/giangvien">
+                <i class="fas fa-clipboard-check "></i>
+                  <span>Quản lý giảng viên</span>
+              </a>
+              
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quanly/sinhvien">
+                <i class="fas fa-user-alt"></i>
+                  <span>Quản lý sinh viên</span>
+              </a>
+              
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/quanly/tintuc">
+                <i class="far fa-newspaper"></i>
+                  <span>Quản lý tin tức</span>
+              </a>
+              
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/quanly/taikhoan">
+              <i class="far fa-user"></i>
+                  <span >Quản lý tài khoản</span>
+              </a>
+              
+          </li>
+
+          <!-- Nav Item - Charts -->
+        
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
+
+       
+
+      </ul>
         <!-- End of Sidebar -->
   
         <!-- Content Wrapper -->
@@ -179,7 +181,7 @@
                         <a style="text-align: right;" class="dropdown-item" href="#" data-toggle="modal"
                             data-target="#addcate">
                             <i class="fas fa-plus-square" style='font-size:20px; color: 
-                        #4e73df;'></i> Thêm mới
+                        #4e73df;'></i> Đánh giá đồ án
                         </a>
                     </div>
                 </div>
@@ -346,7 +348,7 @@
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" style="width: 800px;">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Cập nhật Đề tài
                                 </h5>
@@ -379,7 +381,7 @@
                                     
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Chọn chủ đề</label>
-                                    <select name="IDchude">
+                                    <select class="form-control" name="IDchude">
                                         <option value="<%= ds_detai.IDchude %>">
                                             <%= ds_detai.tenchude %>
                                         </option>
@@ -417,7 +419,7 @@
              <div class="modal fade" id="detailcate<%=ds_detai.IDdetai %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 800px;">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Chi tiết Đề tài</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -509,76 +511,154 @@
             </div> 
 
             <% }); %>
-                <form action="/quanly/detai/them_detai" method="POST" enctype="multipart/form-data">
-
+            
                     <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="width: 800px;">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới Đề tài</i></h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Đánh giá đồ án</i></h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Mã Đề tài</label>
-                                        <input type="text" class="form-control" name="IDdetai" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Tên Đề tài</label>
-                                        <input type="text" class="form-control" name="tendetai" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Số sinh viên tham gia</label>
-                                        <input type="text" class="form-control" name="sosinhvienthamgia">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Năm thực hiện</label>
-                                        <input type="text" class="form-control" name="nam" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Nhận xét chung</label>
-                                        <input type="text" class="form-control" name="nhanxetchung" >
-                                    </div>
+                                    <div class="table-responsive">
+                                        <table
+                                          class="table table-bordered"
+                                         
+                                        >
+                                        <thead>
+                                          <tr>
+                                            <th>Đề tài</th>
+                                           <th>Sinh viên thực hiện</th>
+                                           <th>Năm thực hiện</th>
+                                            <th>Tùy chọn</th>
+                                          </tr>
+                                        </thead>
+                        
+                                        
+                                        <tbody>
+                                            <% dachon.rows.forEach(function(chon){ %>
+                                          <tr>
+                                            <td><%= chon.tendetai %></td>
+                                            <td><%= chon.tensinhvien %></td>
+                                            <td><%= chon.namthuchien %></td>
+                                            <td>
+                                                <!-- <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      Dropdown button
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <div class="form-group">
+                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <input type="hidden" name="IDdetai" id="IDdetai" value="<%=chon.IDdetai %>">
+                                                          </div>
+                                                  <div class="form-group">
+                                                    <button type="submit" id="dat" class="btn btn-primary" class="dropdown-item"  data-dismiss="modal">Đạt</button>
+                                                  </div>
+                                                      <a class="dropdown-item" href="#">Another action</a>
+                                                      <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                  </div> -->
+                                                
+                                                <ul style="list-style: none;display: flex;">
+                                                <li > 
+                                                   
+                                                        <div class="form-group">
+                                            
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <input type="hidden" name="IDdetai" id="IDdetai" value="<%=chon.IDdetai %>">
+                                                            </div>
+                                                    <div class="form-group">
+                                                      <button type="submit" id="dat" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-thumbs-up"></i></button>
+                                                    </div>
+                                                
+                                                </li>&nbsp;&nbsp;
+                                                  <li>
+                                                   
+                                                        <div class="form-group">
+                                                            <input type="hidden" name="IDdetai"  id="IDdetais" value="<%=chon.IDdetai %>">
+                                                            </div>
+                                                    <div class="form-group">
+                                                      <button type="submit" id="khongdat" class="btn btn-primary" data-dismiss="modal"><i class="	fa fa-thumbs-down"></i></button>
+                                                    </div>
+                                                 
+                                                </li>
+                                            </ul></td>
+                                          
+                                          </tr>
+                                          <% }); %>
+                                
+                                        </tbody>
                                     
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn chủ đề</label>
-                                    <select name="IDchude">
-                                       
-                                        <% chude.rows.forEach(function(chude){ %>
-                                            <option value="<%= chude.IDchude %>">
-                                                <%= chude.tenchude %>
-                                            </option>
-                                            <% }); %>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn Hội đồng</label>
-                                    <select name="IDhoidong">
-
-                                        <% hoidong.rows.forEach(function(hoidong){ %>
-                                            <option value="<%= hoidong.IDhoidong %>">
-                                                <%= hoidong.chutichhoidong %>
-                                            </option>
-                                            <% }); %>
-                                    </select>
-                                </div>
-                               
-                                <button type="submit" class="btn btn-primary">Thêm mới</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="/quanly/detai" class="btn btn-primary">Trở lại</a>
+                                 
+                                        
+                                        </table>
+                                      </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                   
 
 
 
 
                 <%- include("./layout/layout.footer.ejs") %>
                     <%- include("./layout/layout.js.ejs") %>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+                    <script type="text/javascript">
+                        function notify(name) {
+                            $.notify(name, "success");
+                        }
+                    </script>
+                    <script>
+                      $(document).ready(function () {
+                        $("#dat").click(async function () { var data = await {
+                      IDdetai: document.getElementById("IDdetai").value,
+                      
+                     
+                    };
+                    var f = await fetch("http://localhost:8008/quanly/detai/dat", {
+                      method: "POST", // or 'PUT'
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(data),
+                    }).then(response => response.json())
+                  .then(data => {notify(data.message);setTimeout(() => {
+                    location.reload()
+                  }, 2000);});
+                   });
+                        
+                    
+                });
+                    </script>
+                    <script>
+                      $(document).ready(function () {
+                        $("#khongdat").click(async function () { var data = await {
+                      IDdetai: document.getElementById("IDdetais").value,
+                      
+                     
+                    };
+                    var f = await fetch("http://localhost:8008/quanly/detai/khongdat", {
+                      method: "POST", // or 'PUT'
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(data),
+                    }).then(response => response.json())
+                  .then(data => {notify(data.message);setTimeout(() => {
+                    location.reload()
+                  }, 2000);});
+                   });
+                    
+                });
+                    </script>
 </body>
 
 

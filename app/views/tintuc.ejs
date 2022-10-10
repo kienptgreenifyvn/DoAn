@@ -14,7 +14,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quanly">
                 <div class="sidebar-brand-icon ">
@@ -49,14 +49,14 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/quanly/detai">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Quản lý đề tài</span></a>
             </li>
   
          
             <li class="nav-item">
               <a class="nav-link" href="/quanly/hoidong">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-calendar"></i>
                     <span>Quản lý hội đồng</span></a>
             </li>
             <li class="nav-item">
@@ -68,14 +68,14 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/giangvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-clipboard-check "></i>
                     <span>Quản lý giảng viên</span>
                 </a>
                 
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/sinhvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-user-alt"></i>
                     <span>Quản lý sinh viên</span>
                 </a>
                 
@@ -90,7 +90,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/quanly/taikhoan">
-                  <i class="far fa-newspaper"></i>
+                <i class="far fa-user"></i>
                     <span >Quản lý tài khoản</span>
                 </a>
                 
@@ -254,7 +254,7 @@
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" style="width: 750PX;">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Cập nhật tin tức
                                 </h5>
@@ -264,7 +264,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">ID tin tức</label>
+                                    <label for="exampleInputPassword1">Mã tin tức</label>
                                     <input type="text" class="form-control" name="IDtintuc"
                                         value="<%=DS_tintuc[index].dataValues.IDtintuc %>">
                                 </div>
@@ -296,7 +296,7 @@
              <div class="modal fade" id="detailcate<%=DS_tintuc[index].dataValues.IDtintuc %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="width: 700px ;">
+                    <div class="modal-content" style="width: 750px ;">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Chi tiết tin tức</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -357,7 +357,7 @@
                     <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="width: 750PX;">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Thêm mới tin tức</i></h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -366,7 +366,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">ID tin tức</label>
+                                        <label for="exampleInputPassword1">Mã tin tức</label>
                                         <input type="text" class="form-control" name="IDtintuc">
                                     </div>
                                     <div class="form-group">

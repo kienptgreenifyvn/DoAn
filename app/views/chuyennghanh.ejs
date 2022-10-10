@@ -16,7 +16,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quanly">
                 <div class="sidebar-brand-icon ">
@@ -51,14 +51,14 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/quanly/detai">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Quản lý đề tài</span></a>
             </li>
   
          
             <li class="nav-item">
               <a class="nav-link" href="/quanly/hoidong">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-calendar"></i>
                     <span>Quản lý hội đồng</span></a>
             </li>
             <li class="nav-item">
@@ -70,14 +70,14 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/giangvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-clipboard-check "></i>
                     <span>Quản lý giảng viên</span>
                 </a>
                 
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/sinhvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-user-alt"></i>
                     <span>Quản lý sinh viên</span>
                 </a>
                 
@@ -92,7 +92,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/quanly/taikhoan">
-                  <i class="far fa-newspaper"></i>
+                <i class="far fa-user"></i>
                     <span >Quản lý tài khoản</span>
                 </a>
                 
@@ -200,38 +200,39 @@
                         </thead>
 
                         <tbody>
-                            <% for (let index=0; index < DS_chuyennghanh.length; index++) {%>
+                            <% ds_chuyennghanh.rows.forEach(function(DS_chuyennghanh){ %>
+                           
                                 <tr>
                                     <td>
 
-                                        <%= DS_chuyennghanh[index].dataValues.tendonvi %>
+                                        <%= DS_chuyennghanh.tendonvi %>
                                     </td>
                                     <td>
 
-                                        <%= DS_chuyennghanh[index].dataValues.diachi %>
+                                        <%= DS_chuyennghanh.diachi %>
                                     </td>
                                     <td>
                                             <ul style="list-style: none;display: flex;">
                                                 <li> <a  href="#" data-toggle="modal"
-                                                    data-target="#importExcel<%=DS_chuyennghanh[index].dataValues.IDdonvi %>">
+                                                    data-target="#importExcel<%=DS_chuyennghanh.IDdonvi %>">
                                                     <i class="fa fa-file-excel" aria-hidden="true" style='font-size:20px; color: rgb(122, 255, 144);'></i></i>&nbsp;&nbsp;&nbsp;
                                                 </a>
                                             </li>
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#detailcate<%=DS_chuyennghanh[index].dataValues.IDdonvi %>">
+                                                        data-target="#detailcate<%=DS_chuyennghanh.IDdonvi %>">
                                                         <i class="fas fa-eye"
                                                             style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
                                                     </a>
                                                 </li>
 
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#updatecate<%=DS_chuyennghanh[index].dataValues.IDdonvi %>">
+                                                        data-target="#updatecate<%=DS_chuyennghanh.IDdonvi %>">
                                                         <i class='fas fa-pencil-ruler'
                                                             style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
                                                     </a>
                                                 </li>
                                                 <li> <a 
-                                                        href="./chuyennghanh/xoa_chuyennghanh/<%= DS_chuyennghanh[index].dataValues.IDdonvi %>"
+                                                        href="./chuyennghanh/xoa_chuyennghanh/<%= DS_chuyennghanh.IDdonvi %>"
                                                         onclick=" confirm('Are you sure you want to delete this item?');"><i
                                                             class="fas fa-trash"
                                                             style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
@@ -240,17 +241,17 @@
                                        
                                     </td>
                                 </tr>
-                                <%}%>
+                                <% }); %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
        
-        <% for (let index=0; index < DS_chuyennghanh.length; index++) {%>
-            <form action="/quanly/chuyennghanh/sua_chuyennghanh/<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" method="POST"
+        <% ds_chuyennghanh.rows.forEach(function(DS_chuyennghanh){ %>
+            <form action="/quanly/chuyennghanh/sua_chuyennghanh/<%=DS_chuyennghanh.IDdonvi %>" method="POST"
                 enctype="application/x-www-form-urlencoded">
-                <div class="modal fade" id="updatecate<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" tabindex="-1"
+                <div class="modal fade" id="updatecate<%=DS_chuyennghanh.IDdonvi %>" tabindex="-1"
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
@@ -266,27 +267,27 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mã chuyên ngành</label>
                                     <input type="text" class="form-control" name="IDdonvi"
-                                        value="<%=DS_chuyennghanh[index].dataValues.IDdonvi %>">
+                                        value="<%=DS_chuyennghanh.IDdonvi %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Tên chuyên ngành</label>
                                     <input type="text" class="form-control" name="tendonvi"
-                                        value="<%=DS_chuyennghanh[index].dataValues.tendonvi %>">
+                                        value="<%=DS_chuyennghanh.tendonvi %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Địa chỉ</label>
                                     <input type="text" class="form-control" name="diachi"
-                                        value="<%=DS_chuyennghanh[index].dataValues.diachi %>">
+                                        value="<%=DS_chuyennghanh.diachi %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Số điện thoại</label>
                                     <input type="text" class="form-control" name="sodienthoai"
-                                        value="<%=DS_chuyennghanh[index].dataValues.sodienthoai %>">
+                                        value="<%=DS_chuyennghanh.sodienthoai %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Trưởng chuyên ngành</label>
                                     <input type="text" class="form-control" name="truongdonvi"
-                                        value="<%=DS_chuyennghanh[index].dataValues.truongdonvi %>">
+                                        value="<%=DS_chuyennghanh.truongdonvi %>">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="/quanly/chuyennghanh" class="btn btn-primary">Trở lại</a>
@@ -298,7 +299,7 @@
             </form>
 
 
-             <div class="modal fade" id="detailcate<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" tabindex="-1" role="dialog"
+             <div class="modal fade" id="detailcate<%=DS_chuyennghanh.IDdonvi %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="width: 700px">
@@ -314,21 +315,21 @@
                                     <tr>
                                         <th>Tên chuyên ngành</th>
                                         <td>
-                                            <%= DS_chuyennghanh[index].dataValues.tendonvi %>
+                                            <%= DS_chuyennghanh.tendonvi %>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Phòng</th>
                                         <td>
-                                            <%= DS_chuyennghanh[index].dataValues.diachi %>
+                                            <%= DS_chuyennghanh.diachi %>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Số điện thoại</th>
                                         <td>
-                                            <%= DS_chuyennghanh[index].dataValues.sodienthoai %>
+                                            <%= DS_chuyennghanh.sodienthoai %>
                                         </td>
 
                                     </tr>
@@ -411,7 +412,7 @@
 
             <form action="/quanly/chuyennghanh/upload" method="POST" enctype="multipart/form-data">
 
-                <div class="modal fade" id="importExcel<%=DS_chuyennghanh[index].dataValues.IDdonvi %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="importExcel<%=DS_chuyennghanh.IDdonvi %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content" style="width: 700px">
@@ -427,7 +428,7 @@
                                       type="hidden"
                                       class="form-control"
                                       name="IDdonvi" id="IDdonvi"
-                                      value="<%=DS_chuyennghanh[index].dataValues.IDdonvi %>"
+                                      value="<%=DS_chuyennghanh.IDdonvi %>"
                                     />
                                   </div>
                                   <div class="form-group">
@@ -484,7 +485,7 @@
                 </div>
             </form>
 
-            <%}%>
+            <% }); %>
                 </div>
                 <form action="/quanly/chuyennghanh/them_chuyennghanh" method="POST" enctype="application/x-www-form-urlencoded">
 

@@ -32,6 +32,7 @@ db.detai.belongsTo(db.giangvien, { foreignKey: "IDgiangvien" });
 db.sinhvien.belongsTo(db.donvi, { foreignKey: "IDdonvi" });
 db.sinhvien.belongsTo(db.user, { foreignKey: "id" });
 db.giangvien.belongsTo(db.user, { foreignKey: "id" });
+db.giangvien.belongsTo(db.hoidong, { foreignKey: "IDhoidong" });
 db.sinhvien.belongsTo(db.lop, { foreignKey: "IDlop" });
 db.sinhvien.belongsTo(db.detai, { foreignKey: "IDdetai" });
 db.sinhvien.belongsTo(db.giangvien, { foreignKey: "IDgiangvien" });

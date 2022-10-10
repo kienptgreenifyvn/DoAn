@@ -14,7 +14,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quanly">
                 <div class="sidebar-brand-icon ">
@@ -49,14 +49,14 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/quanly/detai">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Quản lý đề tài</span></a>
             </li>
   
          
             <li class="nav-item">
               <a class="nav-link" href="/quanly/hoidong">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-calendar"></i>
                     <span>Quản lý hội đồng</span></a>
             </li>
             <li class="nav-item">
@@ -68,14 +68,14 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/giangvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-clipboard-check "></i>
                     <span>Quản lý giảng viên</span>
                 </a>
                 
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/quanly/sinhvien">
-                  <i class="far fa-newspaper"></i>
+                  <i class="fas fa-user-alt"></i>
                     <span>Quản lý sinh viên</span>
                 </a>
                 
@@ -90,7 +90,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/quanly/taikhoan">
-                  <i class="far fa-newspaper"></i>
+                <i class="far fa-user"></i>
                     <span >Quản lý tài khoản</span>
                 </a>
                 
@@ -192,7 +192,7 @@
                         <thead>
                             <tr>
                                 <th>Mã hội đồng</th>
-                                <th>Chủ tịch hội đồng</th>
+                                <th>Hội đồng</th>
                                 <th>Số thành viên</th>
                                 <th>Tùy chọn</th>
                             </tr>
@@ -269,7 +269,7 @@
                                         value="<%=DS_hoidong[index].dataValues.IDhoidong %>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Chủ tịch hội đồng</label>
+                                    <label for="exampleInputPassword1">Hội đồng</label>
                                     <input type="text" class="form-control" name="chutichhoidong"
                                         value="<%=DS_hoidong[index].dataValues.chutichhoidong %>">
                                 </div>
@@ -287,7 +287,7 @@
                                     <label for="exampleInputPassword1">Điểm hội đồng</label>
                                     <input type="text" class="form-control" name="diemhoidong"
                                         value="<%=DS_hoidong[index].dataValues.diemhoidong %>"> -->
-                                </div>
+                                <!-- </div> -->
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="/quanly/hoidong" class="btn btn-primary">Trở lại</a>
                             </div>
@@ -319,7 +319,7 @@
 
                                     </tr>
                                     <tr>
-                                        <th>Chủ tịch hội đồng</th>
+                                        <th>Hội đồng</th>
                                         <td>
                                             <%= DS_hoidong[index].dataValues.chutichhoidong %>
                                         </td>
@@ -381,7 +381,7 @@
                                             >
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Chủ tịch hội đồng</label>
+                                        <label for="exampleInputPassword1">Hội đồng</label>
                                         <input type="text" class="form-control" name="chutichhoidong"
                                            >
                                     </div>

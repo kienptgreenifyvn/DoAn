@@ -85,7 +85,7 @@ exports.danhsach_sinhvien = (req, res) => {
                                           return console.error("error", err);
                                         }
                                         client.query(
-                                          `SELECT * FROM lops where "IDlop" != '${chon_sinhvien.rows[0].IDlop}' `,
+                                          `SELECT * FROM lops where "IDlop" != '${chon_sinhvien.rows[0]?.IDlop}' `,
                                           function (err, result) {
                                             done();
 
@@ -109,7 +109,7 @@ exports.danhsach_sinhvien = (req, res) => {
                                                   );
                                                 }
                                                 client.query(
-                                                  `SELECT * FROM donvis where "IDdonvi" != ${chon_sinhvien.rows[0].IDdonvi} `,
+                                                  `SELECT * FROM donvis where "IDdonvi" != ${chon_sinhvien.rows[0]?.IDdonvi} `,
                                                   function (err, result) {
                                                     done();
 
@@ -134,7 +134,7 @@ exports.danhsach_sinhvien = (req, res) => {
                                                           );
                                                         }
                                                         client.query(
-                                                          `SELECT * FROM giangviens where "IDgiangvien" != ${chon_sinhvien.rows[0].IDgiangvien} `,
+                                                          `SELECT * FROM giangviens where "IDgiangvien" != ${chon_sinhvien.rows[0]?.IDgiangvien} `,
                                                           function (
                                                             err,
                                                             result
@@ -285,7 +285,7 @@ exports.loc_danhsach_sinhvien = (req, res) => {
                                           return console.error("error", err);
                                         }
                                         client.query(
-                                          `SELECT * FROM lops where "IDlop" != '${chon_sinhvien.rows[0].IDlop}' `,
+                                          `SELECT * FROM lops where "IDlop" != '${chon_sinhvien.rows[0]?.IDlop}' `,
                                           function (err, result) {
                                             done();
 
@@ -309,7 +309,7 @@ exports.loc_danhsach_sinhvien = (req, res) => {
                                                   );
                                                 }
                                                 client.query(
-                                                  `SELECT * FROM donvis where "IDdonvi" != ${chon_sinhvien.rows[0].IDdonvi} `,
+                                                  `SELECT * FROM donvis where "IDdonvi" != ${chon_sinhvien.rows[0]?.IDdonvi} `,
                                                   function (err, result) {
                                                     done();
 
@@ -334,7 +334,7 @@ exports.loc_danhsach_sinhvien = (req, res) => {
                                                           );
                                                         }
                                                         client.query(
-                                                          `SELECT * FROM giangviens where "IDgiangvien" != ${chon_sinhvien.rows[0].IDgiangvien} `,
+                                                          `SELECT * FROM giangviens where "IDgiangvien" != ${chon_sinhvien.rows[0]?.IDgiangvien} `,
                                                           function (
                                                             err,
                                                             result

@@ -309,10 +309,29 @@ exports.quanlyhuongdan = (req, res) => {
                   return console.error("error running query", err);
                 } else {
                   var detai = result;
-                  res.render("./quanlyhuongdan.ejs", {
-                    huongdan: huongdan,
-                    detai: detai,
-                    giangvien: giangvien,
+                  pool_db.connect(function (err, client, done) {
+                    if (err) {
+                      return console.error("error", err);
+                    }
+                    client.query(
+                      `SELECT * FROM donvis`,
+                      function (err, result) {
+                        done();
+
+                        if (err) {
+                          res.end();
+                          return console.error("error running query", err);
+                        } else {
+                          var donvi = result;
+                          res.render("./quanlyhuongdan.ejs", {
+                            huongdan: huongdan,
+                            detai: detai,
+                            giangvien: giangvien,
+                            donvi: donvi,
+                          });
+                        }
+                      }
+                    );
                   });
                 }
               }
@@ -337,6 +356,10 @@ exports.loc_quanlyhuongdan = (req, res) => {
         req.body.IDdetai != ""
           ? ` and detais."IDdetai" = ${req.body.IDdetai}`
           : ""
+      } ${
+        req.body.IDdonvi != ""
+          ? ` and sinhviens."IDdonvi" = ${req.body.IDdonvi}`
+          : ""
       } `,
       function (err, result) {
         done();
@@ -360,10 +383,29 @@ exports.loc_quanlyhuongdan = (req, res) => {
                   return console.error("error running query", err);
                 } else {
                   var detai = result;
-                  res.render("./quanlyhuongdan.ejs", {
-                    huongdan: huongdan,
-                    detai: detai,
-                    giangvien: giangvien,
+                  pool_db.connect(function (err, client, done) {
+                    if (err) {
+                      return console.error("error", err);
+                    }
+                    client.query(
+                      `SELECT * FROM donvis`,
+                      function (err, result) {
+                        done();
+
+                        if (err) {
+                          res.end();
+                          return console.error("error running query", err);
+                        } else {
+                          var donvi = result;
+                          res.render("./quanlyhuongdan.ejs", {
+                            huongdan: huongdan,
+                            detai: detai,
+                            giangvien: giangvien,
+                            donvi: donvi,
+                          });
+                        }
+                      }
+                    );
                   });
                 }
               }
@@ -405,10 +447,106 @@ exports.quanlydoanhuongdan = (req, res) => {
                   return console.error("error running query", err);
                 } else {
                   var detai = result;
-                  res.render("./doanhuongdan.ejs", {
-                    huongdan: huongdan,
-                    detai: detai,
-                    giangvien: giangvien,
+                  pool_db.connect(function (err, client, done) {
+                    if (err) {
+                      return console.error("error", err);
+                    }
+                    client.query(
+                      `SELECT * FROM donvis `,
+                      function (err, result) {
+                        done();
+
+                        if (err) {
+                          res.end();
+                          return console.error("error running query", err);
+                        } else {
+                          var donvi = result;
+                          res.render("./doanhuongdan.ejs", {
+                            huongdan: huongdan,
+                            detai: detai,
+                            giangvien: giangvien,
+                            donvi: donvi,
+                          });
+                        }
+                      }
+                    );
+                  });
+                }
+              }
+            );
+          });
+        }
+      }
+    );
+  });
+};
+exports.loc_quanlydoanhuongdan = (req, res) => {
+  const giangvien = req.session.giangvien;
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(
+      `SELECT * FROM detais inner join chudes on detais."IDchude" = chudes."IDchude" inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" inner join giangviens on giangviens."IDgiangvien" = detais."IDgiangvien" inner join donvis on donvis."IDdonvi" = giangviens."IDdonvi" where giangviens."IDgiangvien" = ${
+        giangvien.IDgiangvien
+      } and detais."isActive" = true and 1 = 1 ${
+        req.body.IDdetai != ""
+          ? ` and detais."IDdetai" = ${req.body.IDdetai}`
+          : ""
+      } ${
+        req.body.nam != ""
+          ? ` and sinhviens."namthuchien" = '${req.body.nam}'`
+          : ""
+      }  ${
+        req.body.IDdonvi != ""
+          ? ` and sinhviens."IDdonvi" = ${req.body.IDdonvi}`
+          : ""
+      } `,
+      function (err, result) {
+        done();
+
+        if (err) {
+          res.end();
+          return console.error("error running query", err);
+        } else {
+          var huongdan = result;
+          pool_db.connect(function (err, client, done) {
+            if (err) {
+              return console.error("error", err);
+            }
+            client.query(
+              `SELECT * FROM detais where detais."IDgiangvien" = ${giangvien.IDgiangvien} `,
+              function (err, result) {
+                done();
+
+                if (err) {
+                  res.end();
+                  return console.error("error running query", err);
+                } else {
+                  var detai = result;
+                  pool_db.connect(function (err, client, done) {
+                    if (err) {
+                      return console.error("error", err);
+                    }
+                    client.query(
+                      `SELECT * FROM donvis `,
+                      function (err, result) {
+                        done();
+
+                        if (err) {
+                          res.end();
+                          return console.error("error running query", err);
+                        } else {
+                          var donvi = result;
+                          res.render("./doanhuongdan.ejs", {
+                            huongdan: huongdan,
+                            detai: detai,
+                            giangvien: giangvien,
+                            donvi: donvi,
+                          });
+                        }
+                      }
+                    );
                   });
                 }
               }
