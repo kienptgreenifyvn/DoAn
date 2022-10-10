@@ -68,7 +68,7 @@ exports.danhsach_detai = (req, res) => {
                                     return console.error("error", err);
                                   }
                                   client.query(
-                                    `SELECT * FROM chudes where "IDchude" != ${chon_detai.rows[0].IDchude} `,
+                                    `SELECT * FROM chudes where "IDchude" != ${chon_detai.rows[0]?.IDchude} `,
                                     function (err, result) {
                                       done();
 
@@ -89,7 +89,7 @@ exports.danhsach_detai = (req, res) => {
                                             return console.error("error", err);
                                           }
                                           client.query(
-                                            `SELECT * FROM hoidongs where "IDhoidong" != ${chon_detai.rows[0].IDhoidong} `,
+                                            `SELECT * FROM hoidongs where "IDhoidong" != ${chon_detai.rows[0]?.IDhoidong} `,
                                             function (err, result) {
                                               done();
 
@@ -138,7 +138,7 @@ exports.danhsach_detai = (req, res) => {
                                                               );
                                                             }
                                                             client.query(
-                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true `,
+                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true and detais."isActive" = false `,
                                                               function (
                                                                 err,
                                                                 result
@@ -291,7 +291,7 @@ exports.loc_danhsach_detai = (req, res) => {
                                     return console.error("error", err);
                                   }
                                   client.query(
-                                    `SELECT * FROM chudes where "IDchude" != ${chon_detai.rows[0].IDchude} `,
+                                    `SELECT * FROM chudes where "IDchude" != ${chon_detai.rows[0]?.IDchude} `,
                                     function (err, result) {
                                       done();
 
@@ -312,7 +312,7 @@ exports.loc_danhsach_detai = (req, res) => {
                                             return console.error("error", err);
                                           }
                                           client.query(
-                                            `SELECT * FROM hoidongs where "IDhoidong" != ${chon_detai.rows[0].IDhoidong} `,
+                                            `SELECT * FROM hoidongs where "IDhoidong" != ${chon_detai.rows[0]?.IDhoidong} `,
                                             function (err, result) {
                                               done();
 
