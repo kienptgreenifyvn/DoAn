@@ -43,7 +43,7 @@ exports.upload = async (req, res) => {
             isBook: false,
             dotbaove: req.body.dotbaove,
             namthuchien: new Date().getFullYear(),
-            IDdonvi: req.body.IDdonvi,
+            IDdonvi: Number(req.body.IDdonvi),
             IDlop: row[12],
             id: row[0],
           };
