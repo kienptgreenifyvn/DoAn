@@ -78,7 +78,11 @@ exports.loc_detai = (req, res) => {
         req.body.IDdonvi != ""
           ? ` and giangviens."IDdonvi" = ${req.body.IDdonvi}`
           : ""
-      } `,
+      } ${
+        req.body.nam != ""
+          ? ` and sinhviens."namthuchien" = '${req.body.nam}'`
+          : ""
+      }`,
       function (err, result) {
         done();
 
@@ -182,7 +186,11 @@ exports.loc_detaigv = (req, res) => {
         req.body.IDchude != ""
           ? ` and detais."IDchude" = ${req.body.IDchude}`
           : ""
-      } `,
+      } ${
+        req.body.nam != ""
+          ? ` and sinhviens."namthuchien" = '${req.body.nam}'`
+          : ""
+      }`,
       function (err, result) {
         done();
 

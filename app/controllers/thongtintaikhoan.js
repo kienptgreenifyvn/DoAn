@@ -53,7 +53,7 @@ exports.capnhatthongtin_sv = async (req, res) => {
         sodienthoai: sodienthoai,
         kynang: kynang,
         diemtichluy: diemtichluy,
-        //anhsinhvien: req.file.originalname,
+        anhsinhvien: req.file.originalname,
       },
       {
         where: {
@@ -62,7 +62,7 @@ exports.capnhatthongtin_sv = async (req, res) => {
       }
     );
 
-    return res.status(200).json({ message: "Cập nhật thông tin thành công !" });
+    return res.status(200).redirect("../../sinhvien/thongtintaikhoan");
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -123,7 +123,7 @@ exports.capnhatthongtin_gv = async (req, res) => {
         IDgiangvien: IDgiangvien,
         tengiangvien: tengiangvien,
         sodienthoai: sodienthoai,
-        // anhgiangvien: req.file.originalname,
+        anhgiangvien: req.file.originalname,
         huongnghiencuu: huongnghiencuu,
         diachi: diachi,
       },
@@ -134,7 +134,7 @@ exports.capnhatthongtin_gv = async (req, res) => {
       }
     );
 
-    return res.status(200).json({ message: "Cập nhật thông tin thành công !" });
+    return res.status(200).redirect("../../giangvien/thongtintaikhoan");
   } catch (err) {
     res.status(500).json({
       success: false,

@@ -5,25 +5,44 @@ var pool_db = require("../config/crdb.config").pool_db;
 const config = require("../config/auth.config");
 
 exports.danhsach_hoidong = (req, res) => {
-  hoidong.findAll().then((ds_hoidong) => {
-    // res.json(ds_khoa);
-    res.render("./hoidong.ejs", { DS_hoidong: ds_hoidong });
+  pool_db.connect(function (err, client, done) {
+    if (err) {
+      return console.error("error", err);
+    }
+    client.query(`SELECT * FROM hoidongs`, function (err, result) {
+      done();
+
+      if (err) {
+        res.end();
+        return console.error("error running query", err);
+      } else {
+        const DS_hoidong = result;
+        pool_db.connect(function (err, client, done) {
+          if (err) {
+            return console.error("error", err);
+          }
+          client.query(
+            `SELECT * FROM hoidongs inner join giangviens on hoidongs."IDhoidong" = giangviens."IDhoidong"`,
+            function (err, result) {
+              done();
+
+              if (err) {
+                res.end();
+                return console.error("error running query", err);
+              } else {
+                const HDGV = result;
+                res.render("./hoidong.ejs", {
+                  DS_hoidong: DS_hoidong,
+                  HDGV: HDGV,
+                });
+              }
+            }
+          );
+        });
+      }
+    });
   });
 };
-
-// exports.chitiet_khoa = (req, res) => {
-//   Khoa.findOne({
-//     where: {
-//       id: req.params.id,
-//     },
-//   })
-//     .then((ct_khoa) => {
-//       res.json(ct_khoa);
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: err.message });
-//     });
-// };
 
 exports.them_hoidong = (req, res) => {
   hoidong

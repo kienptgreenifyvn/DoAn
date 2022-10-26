@@ -137,11 +137,11 @@
         <div><img src="http://localhost:8008/uploads/<%=thongtin.anhsinhvien %>" alt="" style="width:250px; margin-left: 30px;margin-top: 50px;"></div>
       </div>
       <div class="col-8">
-        <!-- <form
+        <form
           action="/sinhvien/capnhatthongtin"
           method="POST"
          enctype="multipart/form-data"
-        > -->
+        >
         <div class="form-group col-md-6">
           <input
             type="hidden"
@@ -196,7 +196,7 @@
               />
             </div>
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="formFileMultiple" class="form-label"
               >Ảnh sinh viên</label
             >
@@ -208,7 +208,7 @@
               multiple
               required
             />
-          </div> -->
+          </div>
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Các kiến thức và kỹ năng</b></label>
             <textarea  class="form-control" name="kynang" id="kynang" rows="4" cols="50"><%=thongtin.kynang %></textarea>
@@ -217,7 +217,7 @@
             <button type="submit" class="btn btn-primary chinhsua">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/sinhvien" class="btn btn-primary">Trở lại</a>
           </div>
-  
+        </form>
       </div>
       <div class="col-1"></div>
     </div>
@@ -232,7 +232,7 @@
         $.notify(name, "success");
       }
     </script>
-      <script>
+      <!-- <script>
         $(document).ready(function () {
           $(".chinhsua").click(async function () { var data = await {
             IDsinhvien: document.getElementById("IDsinhvien").value,
@@ -260,6 +260,6 @@
           
       
   });
-  </script>
+  </script> -->
   </body>
 </html>

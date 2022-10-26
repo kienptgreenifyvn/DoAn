@@ -143,11 +143,11 @@
         <div><img src="http://localhost:8008/uploads/<%=thongtin.anhgiangvien %>" alt="" style="width:250px; margin-left: 30px;margin-top: 50px;"></div>
       </div>
       <div class="col-8">
-          <!-- <form
+          <form
           action="/giangvien/capnhatthongtin"
           method="POST"
          enctype="multipart/form-data"
-        > -->
+        >
         <div class="form-group col-md-6">
           <input
             type="hidden"
@@ -203,8 +203,8 @@
             </div>
           </div>
           <div class="form-group">
-            <!-- <label for="formFileMultiple" class="form-label"
-              >Ảnh sinh viên</label
+            <label for="formFileMultiple" class="form-label"
+              >Ảnh giảng viên</label
             >
             <input
               class="form-control"
@@ -212,10 +212,10 @@
               name="anh"
               id="anh"
               multiple
-              
+              required
               
             />
-          </div> -->
+          </div>
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Hướng nghiên cứu</b></label>
             <textarea  class="form-control" name="huongnghiencuu" id="huongnghiencuu" rows="4" cols="50"><%=thongtin.huongnghiencuu %></textarea>
@@ -224,7 +224,7 @@
             <button type="submit" class="btn btn-primary chinhsua">Chỉnh sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/giangvien" class="btn btn-primary">Trở lại</a>
           </div>
-      
+      </form>
       </div>
       <div class="col-1"></div>
     </div>
@@ -238,7 +238,7 @@
         $.notify(name, "success");
       }
     </script>
-      <script>
+      <!-- <script>
         $(document).ready(function () {
           $(".chinhsua").click(async function () { var data = await {
         IDgiangvien: document.getElementById("IDgiangvien").value,
@@ -264,6 +264,6 @@
           
       
   });
-  </script>
+  </script> -->
   </body>
 </html>

@@ -286,7 +286,7 @@ exports.quanlyhuongdan = (req, res) => {
       return console.error("error", err);
     }
     client.query(
-      `SELECT * FROM sinhviens inner join donvis on sinhviens."IDdonvi" = donvis."IDdonvi" inner join giangviens on giangviens."IDgiangvien" = sinhviens."IDgiangvien" inner join detais on sinhviens."IDdetai" = detais."IDdetai" inner join users on sinhviens."id" = users."id" inner join lops on sinhviens."IDlop" = lops."IDlop" inner join chudes on detais."IDchude" = chudes."IDchude" where giangviens."IDgiangvien" = ${giangvien.IDgiangvien} and sinhviens."isBook" = true `,
+      `SELECT * FROM sinhviens inner join donvis on sinhviens."IDdonvi" = donvis."IDdonvi" inner join giangviens on giangviens."IDgiangvien" = sinhviens."IDgiangvien" inner join detais on sinhviens."IDdetai" = detais."IDdetai" inner join users on sinhviens."id" = users."id" inner join lops on sinhviens."IDlop" = lops."IDlop" inner join chudes on detais."IDchude" = chudes."IDchude" where giangviens."IDgiangvien" = ${giangvien.IDgiangvien} and sinhviens."isBook" = true and detais."isActive" = false `,
       function (err, result) {
         done();
 
@@ -352,7 +352,7 @@ exports.loc_quanlyhuongdan = (req, res) => {
     client.query(
       `SELECT * FROM sinhviens inner join donvis on sinhviens."IDdonvi" = donvis."IDdonvi" inner join giangviens on giangviens."IDgiangvien" = sinhviens."IDgiangvien" inner join detais on sinhviens."IDdetai" = detais."IDdetai" inner join users on sinhviens."id" = users."id" inner join lops on sinhviens."IDlop" = lops."IDlop" inner join chudes on detais."IDchude" = chudes."IDchude" where giangviens."IDgiangvien" = ${
         giangvien.IDgiangvien
-      } and sinhviens."isBook" = true and 1 = 1 ${
+      } and sinhviens."isBook" = true and detais."isActive" = false and 1 = 1 ${
         req.body.IDdetai != ""
           ? ` and detais."IDdetai" = ${req.body.IDdetai}`
           : ""

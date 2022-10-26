@@ -176,6 +176,27 @@
                     </select>
                   </div>
                 </th>
+                <th id="kc1">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1"
+                      >Năm</label
+                    >
+                    <select class="form-control" name="nam">
+                      <option value="">Chọn năm</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
+                      <option value="2031">2031</option>
+
+                    </select>
+                  </div>
+                </th>
                 <th id="kc5">
                   <button
                     type="submit"
@@ -214,7 +235,7 @@
                 <td><%= ds_detai.tendetai %></td>
                 <td><%= ds_detai.tensinhvien %></td>
                 <td><%= ds_detai.tengiangvien %></td>
-                <td><%= ds_detai.thoigianketthuc %></td>
+                <td><%= ds_detai.namthuchien %></td>
 
                 <td>
                   <!-- Example single danger button -->
@@ -294,7 +315,7 @@
                 </tr>
                 <tr>
                   <th>Năm thực hiện</th>
-                  <td><%= ds_detai.thoigianketthuc %></td>
+                  <td><%= ds_detai.namthuchien %></td>
                 </tr>
                 <tr>
                   <th>Tài liệu</th>

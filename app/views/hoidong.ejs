@@ -199,18 +199,18 @@
                         </thead>
 
                         <tbody>
-                            <% for (let index=0; index < DS_hoidong.length; index++) {%>
+                            <% DS_hoidong.rows.forEach(function(DS_hoidong){ %>
                                 <tr>
                                     <td>
-                                        <%= DS_hoidong[index].dataValues.IDhoidong %>
+                                        <%= DS_hoidong.IDhoidong %>
                                     </td>
                                     <td>
 
-                                        <%= DS_hoidong[index].dataValues.chutichhoidong %>
+                                        <%= DS_hoidong.chutichhoidong %>
                                     </td>
                                     <td>
 
-                                        <%= DS_hoidong[index].dataValues.sothanhvien %>
+                                        <%= DS_hoidong.sothanhvien %>
                                     </td>
                                    
                                     <td>
@@ -218,20 +218,20 @@
                                            
                                             <ul style="list-style: none;display: flex;">
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#detailcate<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                                        data-target="#detailcate<%=DS_hoidong.IDhoidong %>">
                                                         <i class="fas fa-eye"
                                                             style='font-size:20px; color: lightsalmon;'></i>&nbsp;&nbsp;&nbsp;
                                                     </a>
                                                 </li>
 
                                                 <li> <a  href="#" data-toggle="modal"
-                                                        data-target="#updatecate<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                                        data-target="#updatecate<%=DS_hoidong.IDhoidong %>">
                                                         <i class='fas fa-pencil-ruler'
                                                             style='font-size:20px; color: blue;'></i>&nbsp;&nbsp;&nbsp; 
                                                     </a>
                                                 </li>
                                                 <li> <a 
-                                                        href="./hoidong/xoa_hoidong/<%= DS_hoidong[index].dataValues.IDhoidong %>"
+                                                        href="./hoidong/xoa_hoidong/<%= DS_hoidong.IDhoidong %>"
                                                         onclick=" confirm('Are you sure you want to delete this item?');"><i
                                                             class="fas fa-trash"
                                                             style='font-size:20px; color: 	#FF3333;'></i>&nbsp;&nbsp;&nbsp; </a>
@@ -240,21 +240,21 @@
                                        
                                     </td>
                                 </tr>
-                                <%}%>
+                                <% }); %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
        
-        <% for (let index=0; index < DS_hoidong.length; index++) {%>
-            <form action="/quanly/hoidong/sua_hoidong/<%=DS_hoidong[index].dataValues.IDhoidong %>" method="POST"
+        <% DS_hoidong.rows.forEach(function(DS_hoidong){ %>
+            <form action="/quanly/hoidong/sua_hoidong/<%=DS_hoidong.IDhoidong %>" method="POST"
                 enctype="application/x-www-form-urlencoded">
-                <div class="modal fade" id="updatecate<%=DS_hoidong[index].dataValues.IDhoidong %>" tabindex="-1"
+                <div class="modal fade" id="updatecate<%=DS_hoidong.IDhoidong %>" tabindex="-1"
                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" style="width: 700px">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Cập nhật hội đồng
                                 </h5>
@@ -266,27 +266,27 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mã hội đồng</label>
                                     <input type="text" class="form-control" name="IDhoidong"
-                                        value="<%=DS_hoidong[index].dataValues.IDhoidong %>">
+                                        value="<%=DS_hoidong.IDhoidong %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Hội đồng</label>
                                     <input type="text" class="form-control" name="chutichhoidong"
-                                        value="<%=DS_hoidong[index].dataValues.chutichhoidong %>">
+                                        value="<%=DS_hoidong.chutichhoidong %>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Số thành viên</label>
                                     <input type="text" class="form-control" name="sothanhvien"
-                                        value="<%=DS_hoidong[index].dataValues.sothanhvien %>">
+                                        value="<%=DS_hoidong.sothanhvien %>">
                                 </div>
-                                <!-- <div class="form-group">
+                               <div class="form-group">
                                     <label for="exampleInputPassword1">Nhận xét</label>
                                     <input type="text" class="form-control" name="nhanxet"
-                                        value="<%=DS_hoidong[index].dataValues.nhanxet %>">
+                                        value="<%=DS_hoidong.nhanxet %>">
                                 </div>
-                                <div class="form-group">
+                              <!--  <div class="form-group">
                                     <label for="exampleInputPassword1">Điểm hội đồng</label>
                                     <input type="text" class="form-control" name="diemhoidong"
-                                        value="<%=DS_hoidong[index].dataValues.diemhoidong %>"> -->
+                                        value="<%=DS_hoidong.diemhoidong %>"> -->
                                 <!-- </div> -->
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="/quanly/hoidong" class="btn btn-primary">Trở lại</a>
@@ -298,10 +298,10 @@
             </form>
 
 
-             <div class="modal fade" id="detailcate<%=DS_hoidong[index].dataValues.IDhoidong %>" tabindex="-1" role="dialog"
+             <div class="modal fade" id="detailcate<%=DS_hoidong.IDhoidong %>" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 700px">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Chi tiết hội đồng</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -314,14 +314,14 @@
                                     <tr>
                                         <th>Mã hội đồng</th>
                                         <td>
-                                            <%= DS_hoidong[index].dataValues.IDhoidong %>
+                                            <%= DS_hoidong.IDhoidong %>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <th>Hội đồng</th>
                                         <td>
-                                            <%= DS_hoidong[index].dataValues.chutichhoidong %>
+                                            <%= DS_hoidong.chutichhoidong %>
                                         </td>
 
                                     </tr>
@@ -329,28 +329,31 @@
                                         <th>Số thành viên</th>
                                         <td>
 
-                                            <%= DS_hoidong[index].dataValues.sothanhvien %>
+                                            <%= DS_hoidong.sothanhvien %>
                                         </td>
 
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                         <th>Nhận xét</th>
                                         <td>
 
-                                            <%= DS_hoidong[index].dataValues.nhanxet %>
+                                            <%= DS_hoidong.nhanxet %>
                                         </td>
 
                                     </tr>
                                     
+                                 
                                     <tr>
-                                        <th>Điểm hộ đồng</th>
+                                        <th>Danh sách giảng viên</th>
+                                        <% HDGV.rows.forEach(function(HDGV){ %>
+                                            <% if (DS_hoidong.IDhoidong == HDGV.IDhoidong) { %>
                                         <td>
-
-                                            <%= DS_hoidong[index].dataValues.diemhoidong %>
+                                            <%= HDGV.tengiangvien%>
                                         </td>
-
-                                    </tr> -->
-                                    
+                                        <% } %>
+         
+                                    <% }); %>  
+                                    </tr>
                                     
                                 </tbody>
                             </table>
@@ -360,14 +363,14 @@
                 </div>
             </div> 
 
-            <%}%>
+            <% }); %>
                 </div>
                 <form action="/quanly/hoidong/them_hoidong" method="POST" enctype="application/x-www-form-urlencoded">
 
                     <div class="modal fade" id="addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="width: 700px">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Thêm mới hội đồng</i></h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -390,12 +393,12 @@
                                         <input type="text" class="form-control" name="sothanhvien"
                                             >
                                     </div>
-                                    <!-- <div class="form-group">
+                                    <div class="form-group">
                                         <label for="exampleInputPassword1">Nhận xét</label>
                                         <input type="text" class="form-control" name="nhanxet"
                                             >
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="exampleInputPassword1">Điểm hội đồng</label>
                                         <input type="text" class="form-control" name="diemhoidong"
                                            >

@@ -176,6 +176,7 @@ exports.loc_danhsach_giangvien = (req, res) => {
 exports.them_giangvien = async (req, res) => {
   try {
     const newUser = {
+      id: req.body.IDgiangvien,
       email: req.body.email,
       password: "123456",
       role: "giangvien",

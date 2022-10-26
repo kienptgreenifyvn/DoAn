@@ -138,7 +138,7 @@ exports.danhsach_detai = (req, res) => {
                                                               );
                                                             }
                                                             client.query(
-                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true and detais."isActive" = false `,
+                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = false and detais."isActive" = false `,
                                                               function (
                                                                 err,
                                                                 result
@@ -361,7 +361,7 @@ exports.loc_danhsach_detai = (req, res) => {
                                                               );
                                                             }
                                                             client.query(
-                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = true `,
+                                                              `SELECT * FROM detais inner join sinhviens on detais."IDdetai" = sinhviens."IDdetai" where detais."isConfim" = false and detais."isActive" = false `,
                                                               function (
                                                                 err,
                                                                 result
